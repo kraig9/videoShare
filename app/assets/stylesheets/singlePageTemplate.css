@@ -9,6 +9,11 @@ body {
     margin-left: 0px;
     font-style: normal;
     font-weight: 200;
+    background-image: -webkit-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
+    background-image: -moz-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
+    background-image: -o-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
+    background-image: linear-gradient(180deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
+    padding-bottom: 347px;
 }
 /* Container */
 .container {
@@ -28,14 +33,11 @@ header {
     padding-left: 0px;
 }
 .logo {
-	color: #fff;
-	font-weight: bold;
-	text-align: undefined;
-	width: 10%;
-	float: left;
-	margin-top: 15px;
-	margin-left: 25px;
-	letter-spacing: 4px;
+    color: #fff;
+    font-weight: bold;
+    text-align: undefined;
+    float: left;
+    letter-spacing: 4px;
 }
 nav {
 	float: right;
@@ -73,18 +75,23 @@ ul li:hover a {
     margin-bottom: 0px;
     margin-left: 0px;
     letter-spacing: 4px;
-    padding-top: 400px;
 }
 /* Hero Section */
 .hero {
     background-color: #B3B3B3;
-    padding-top: 150px;
+    padding-top: 50px;
     padding-bottom: 650px;
     background-image: -webkit-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
     background-image: -moz-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
     background-image: -o-linear-gradient(270deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
     background-image: linear-gradient(180deg,rgba(175,167,167,1.00) 0%,rgba(110,90,207,1.00) 44.04%,rgba(25,0,190,1.00) 98.96%);
 }
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .maxbutton {
     position: relative;
     text-decoration: none;
@@ -308,15 +315,7 @@ footer .footer_column p {
 	max-width: 400px;
 	max-height: 200px;
 }
-footer .footer_column p {
-	padding-left: 30px;
-	padding-right: 30px;
-	text-align: justify;
-	line-height: 25px;
-	font-weight: lighter;
-	margin-left: 20px;
-	margin-right: 20px;
-}
+
 .button {
 	width: 200px;
 	margin-top: 40px;
@@ -356,13 +355,13 @@ footer .footer_column p {
 .footer_banner {
     background-color: #1900BE;
     padding-top: 60px;
-    padding-bottom: 60PX;
+    padding-bottom: 60px;
     margin-bottom: 0px;
-    background-image: url(file:///C|/Users/Andy/AppData/Roaming/Adobe/Dreamweaver%202020/en_US/Configuration/Temp/Assets/eamAF9D.tmp/images/pattern.png);
     background-repeat: repeat;
+    width: 0%;
 }
 footer {
-	display: inline-block;
+	display: block;
 }
 .hidden {
 	display: none;
@@ -555,7 +554,7 @@ nav ul li {
 	padding-top: 30px;
 }
 .banner {
-	padding-left: 20px;
+	padding-left: 0px;
 	padding-right: 20px;
 }
 .footer_column {
@@ -569,7 +568,7 @@ nav ul li {
 	width: 100%;
 }
 .thumbnail {
-	width: 50%;
+    width: 0%;
 }
 .text_column {
 	width: 100%;
