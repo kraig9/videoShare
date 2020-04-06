@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get 'welcome/scene1'
   
   resources :user
+  resources :room
 end

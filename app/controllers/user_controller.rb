@@ -8,7 +8,6 @@ class UserController < ApplicationController
     
     def create
         @user = User.new("balls")
-        
         @user.save
         redirect_to @user
     end
