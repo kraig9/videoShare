@@ -16,4 +16,9 @@ class UserController < ApplicationController
         render "welcome/index"
         #@user = User.find(params[:id])
     end
+    
+    def timestamp
+       @user_room = User.select(params[:room_id])
+       print @user_room
+    end
 end

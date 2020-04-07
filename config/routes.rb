@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   
   resources :user
   resources :room
+  
+  post 'user/timestamp'
 end
