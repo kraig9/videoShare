@@ -4,8 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+# one: {}
+# # column: value
+# #
+# two: {}
+# # column: value
+<% 1.upto(5) do |i| %>
+fix_<%= i %>:
+  id: <%= i %>
+  code: <%= i %>
+<% end %>

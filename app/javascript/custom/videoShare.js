@@ -15,7 +15,15 @@ window.initializeVideo = function () {
         document.getElementById('clickme').addEventListener('click', function() {
             if (player.getPlayerState() == YT.PlayerState.PLAYING) {
                 videoPlayer.pauseVideo();
-                console.log(videoPlayer.getCurrentTime());
+                window.makePostRequest('/user/timestamp', {
+                    "id": 1,
+                    "room_id": 1,
+                    "timestamp": videoPlayer.getCurrentTime(),
+                    "action": "pause"
+                }, function(request) {
+                    alert(request);
+                });
+                // console.log(videoPlayer.getCurrentTime());
             }
             else if (player.getPlayerState() == YT.PlayerState.PAUSED || player.getPlayerState() == YT.PlayerState.CUED) {
                 videoPlayer.playVideo();

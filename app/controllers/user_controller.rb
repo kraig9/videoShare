@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def new
         @user = User.new(params[:id])
         
@@ -13,12 +14,16 @@ class UserController < ApplicationController
     end
     
     def show
-        render "welcome/index"
+        @userall = User.all
+        render "user/timestamp"
         #@user = User.find(params[:id])
     end
     
     def timestamp
-       @user_room = User.select(params[:room_id])
-       print @user_room
+        @user_room = User.select(params[:room_id])
+        @timestamp = params[:timestamp]
+        @action = params[:action]
+        print @user_room
+        render 'user/show'
     end
 end
