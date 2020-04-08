@@ -1,22 +1,6 @@
-// window.sendPostRequest = function(url, data, successCallback, json=true, errorCallback=genericHttpErrorHandler) {
-//     var xhr = new XMLHttpRequest();
-//     xhr.open("POST", url);
-//     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//     if (json) {
-//         xhr.send(JSON.stringify(data));
-//     }
-//     else {
-//         xhr.send(data);
-//     }
-//     xhr.onload = function() {
-//         if (xhr.status == 200) {
-//             successCallback()
-//         } 
-//         else {
-//             errorCallback()
-//         }
-//     };
-// }
+window.getCsrfToken = function() {
+	return document.getElementsByName('csrf-token')[0].content
+}
 
 window.genericHttpErrorHandler = function(error) {
     alert(`something went wrong:  ${error}`);
@@ -46,6 +30,7 @@ window.makeRequest = function (url, method, data, successCallback, json=true, er
 		};
 		// Setup our HTTP request
 		request.open(method, url, true);
+		request.setRequestHeader("X-CSRF-Token", getCsrfToken());
 		// Send the request
 		if (method == "POST") {
 		    if (json) {

@@ -21,7 +21,7 @@ window.initializeVideo = function () {
                     "timestamp": videoPlayer.getCurrentTime(),
                     "action": "pause"
                 }, function(request) {
-                    alert(request);
+                    window.request = request
                 });
                 // console.log(videoPlayer.getCurrentTime());
             }
