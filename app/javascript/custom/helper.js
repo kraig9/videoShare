@@ -34,12 +34,10 @@ window.makeRequest = function (url, method, data, successCallback, json=true, er
 		// Send the request
 		if (method == "POST") {
 		    if (json) {
-		        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		        request.send(JSON.stringify(data));
+		        request.setRequestHeader("Content-Type", "application/json");
+		        data = JSON.stringify(data);
 		    }
-		    else {
-		        request.send(data);
-		    }
+	        request.send(data);
 		}
 	})
     .then(successCallback)

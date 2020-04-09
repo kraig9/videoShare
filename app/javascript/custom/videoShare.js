@@ -12,22 +12,31 @@ window.initializeVideo = function () {
     // 4. The API will call this function when the video player is ready.
     window.onPlayerReady = function (event) {
         var videoPlayer = YT.get('player');
+        console.log(videoPlayer.getCurrentTime())
         document.getElementById('clickme').addEventListener('click', function() {
             if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                videoPlayer.pauseVideo();
+                // videoPlayer.pauseVideo();
                 window.makePostRequest('/user/timestamp', {
                     "id": 1,
-                    "room_id": 1,
+                    "room_id": 2,
                     "timestamp": videoPlayer.getCurrentTime(),
-                    "action": "pause"
+                    "user_action": "pause"
                 }, function(request) {
                     window.request = request
                 });
                 // console.log(videoPlayer.getCurrentTime());
             }
             else if (player.getPlayerState() == YT.PlayerState.PAUSED || player.getPlayerState() == YT.PlayerState.CUED) {
-                videoPlayer.playVideo();
-                console.log(videoPlayer.getCurrentTime());
+                // videoPlayer.playVideo();
+                window.makePostRequest('/user/timestamp', {
+                    "id": 1,
+                    "room_id": 2,
+                    "timestamp": videoPlayer.getCurrentTime(),
+                    "user_action": "play"
+                }, function(request) {
+                    window.request = request
+                });
+                // console.log(videoPlayer.getCurrentTime());
             }
         });
     }
@@ -47,7 +56,7 @@ window.initializeVideo = function () {
             height: '1080',
             width: '1920',
             playerVars: {
-                controls: 0,
+                // controls: 0,
             },
             videoId: 'tgbNymZ7vqY',
             events: {

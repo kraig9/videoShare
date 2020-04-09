@@ -1,6 +1,12 @@
 <%= content_for :includes do %>
 <% end %>
 
+<div
+  id="room_messages" 
+  data-channel-subscribe="room" 
+  data-room-id="<%= @room.id %>" hidden>
+</div>
+
 <button id='clickme'>Click Me</button>
 <div id="player"></div>
 

@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
+    @room = Room.find(2)
   end
   
   def scene1

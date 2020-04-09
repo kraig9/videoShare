@@ -21,11 +21,15 @@ class UserController < ApplicationController
     
     def timestamp
         #@user_room = User.select("room_id = " + params[:id])
-        user_room = User.where('room_id = ?', params[:room_id])
+        #user_room = User.where('room_id = ?', params[:room_id])
         timestamp = params[:timestamp]
-        action = params[:action]
+        user_action = params[:user_action]
+        current_room = Room.find(params[:room_id])
+        puts 'hello!!!!!!!!'
         # @sumOfAll = @user_room + @timestamp + @action
-        message = { :timestamp => timestamp, :action => action }.to_json()
-        RoomChannel.broadcast_to(@room_id, message)
+        message = { :timestamp => timestamp, :user_action => user_action }.to_json()
+        RoomChannel.broadcast_to current_room, content: message
+        # ActionCable.server.broadcast "room_channel", content: message
+        return head :ok
     end
 end
