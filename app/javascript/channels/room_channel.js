@@ -24,7 +24,7 @@ import consumer from "./consumer"
 document.addEventListener('turbolinks:load', function() {
   consumer.subscriptions.create({
       channel: "RoomChannel",
-      room_id: document.getElementById('room_messages').getAttribute('data-room-id')
+      room_id: getRoomId()
     }, {
     connected() {
       // Called when the subscription is ready for use on the server
@@ -39,16 +39,17 @@ document.addEventListener('turbolinks:load', function() {
       // Called when there's incoming data on the websocket for this channel
       data = JSON.parse(data.content);
       console.log(data);
-      if (data.user_action == "play") {
+      if (data.current_user != getUserId()) {
         YT.get("player").seekTo(data.timestamp);
-        YT.get("player").playVideo();
-      }
-      else if (data.user_action == "pause") {
-        YT.get("player").seekTo(data.timestamp)
-        YT.get("player").pauseVideo();
-      }
-      else {
-        alert("Invalid Action!");
+        if (data.user_action == "play") {
+          YT.get("player").playVideo();
+        }
+        else if (data.user_action == "pause") {
+          YT.get("player").pauseVideo();
+        }
+        else {
+          alert("Invalid Action!");
+        }
       }
     },
   

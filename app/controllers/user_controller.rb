@@ -25,9 +25,9 @@ class UserController < ApplicationController
         timestamp = params[:timestamp]
         user_action = params[:user_action]
         current_room = Room.find(params[:room_id])
-        puts 'hello!!!!!!!!'
+        puts 'print statement from the user_controller/timestamp method'
         # @sumOfAll = @user_room + @timestamp + @action
-        message = { :timestamp => timestamp, :user_action => user_action }.to_json()
+        message = { :timestamp => timestamp, :user_action => user_action, :current_user => params[:id] }.to_json()
         RoomChannel.broadcast_to current_room, content: message
         # ActionCable.server.broadcast "room_channel", content: message
         return head :ok

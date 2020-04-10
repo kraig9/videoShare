@@ -7,52 +7,8 @@ window.initializeVideo = function () {
     
     // 3. This function creates an <iframe> (and YouTube player)
     //    after the API code downloads.
-    var player;
-    
-    // 4. The API will call this function when the video player is ready.
-    window.onPlayerReady = function (event) {
-        var videoPlayer = YT.get('player');
-        console.log(videoPlayer.getCurrentTime())
-        document.getElementById('clickme').addEventListener('click', function() {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                // videoPlayer.pauseVideo();
-                window.makePostRequest('/user/timestamp', {
-                    "id": 1,
-                    "room_id": 2,
-                    "timestamp": videoPlayer.getCurrentTime(),
-                    "user_action": "pause"
-                }, function(request) {
-                    window.request = request
-                });
-                // console.log(videoPlayer.getCurrentTime());
-            }
-            else if (player.getPlayerState() == YT.PlayerState.PAUSED || player.getPlayerState() == YT.PlayerState.CUED) {
-                // videoPlayer.playVideo();
-                window.makePostRequest('/user/timestamp', {
-                    "id": 1,
-                    "room_id": 2,
-                    "timestamp": videoPlayer.getCurrentTime(),
-                    "user_action": "play"
-                }, function(request) {
-                    window.request = request
-                });
-                // console.log(videoPlayer.getCurrentTime());
-            }
-        });
-    }
-      
-    
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-    window.onPlayerStateChange = function(event) {
-        // var videoPlayer = YT.get('player');
-        // console.log(event.data);
-    }
-    
     window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('player', {
+        new YT.Player('player', {
             height: '1080',
             width: '1920',
             playerVars: {
@@ -65,4 +21,50 @@ window.initializeVideo = function () {
             }
         });
     }
+    
+    // 4. The API will call this function when the video player is ready.
+    window.onPlayerReady = function (event) {
+        document.getElementById("player")
+        var videoPlayer = YT.get('player');
+        if (videoPlayer.getPlayerState() == YT.PlayerState.PLAYING) {
+            makePostRequest('/user/timestamp', {
+                "id": getUserId(),
+                "room_id": getRoomId(),
+                "timestamp": videoPlayer.getCurrentTime(),
+                "user_action": "pause"
+            }, function(request) {
+                window.request = request
+            });
+            // console.log(videoPlayer.getCurrentTime());
+        }
+        else if (videoPlayer.getPlayerState() == YT.PlayerState.PAUSED || videoPlayer.getPlayerState() == YT.PlayerState.CUED) {
+            // videoPlayer.playVideo();
+            makePostRequest('/user/timestamp', {
+                "id": getUserId(),
+                "room_id": getRoomId(),
+                "timestamp": videoPlayer.getCurrentTime(),
+                "user_action": "play"
+            }, function(request) {
+                window.request = request
+            });
+            // console.log(videoPlayer.getCurrentTime());
+        }
+    }
+      
+    
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    window.onPlayerStateChange = function(event) {
+        
+    }
 }
+
+window.getRoomId = function() {
+    return document.getElementById('room_messages').getAttribute('data-room-id');
+}
+
+window.getUserId = function() {
+    return document.getElementById('user_id').title;
+}}
