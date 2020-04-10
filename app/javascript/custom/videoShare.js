@@ -24,31 +24,33 @@ window.initializeVideo = function () {
     
     // 4. The API will call this function when the video player is ready.
     window.onPlayerReady = function (event) {
-        document.getElementById("player")
-        var videoPlayer = YT.get('player');
-        if (videoPlayer.getPlayerState() == YT.PlayerState.PLAYING) {
-            makePostRequest('/user/timestamp', {
-                "id": getUserId(),
-                "room_id": getRoomId(),
-                "timestamp": videoPlayer.getCurrentTime(),
-                "user_action": "pause"
-            }, function(request) {
-                window.request = request
-            });
-            // console.log(videoPlayer.getCurrentTime());
-        }
-        else if (videoPlayer.getPlayerState() == YT.PlayerState.PAUSED || videoPlayer.getPlayerState() == YT.PlayerState.CUED) {
-            // videoPlayer.playVideo();
-            makePostRequest('/user/timestamp', {
-                "id": getUserId(),
-                "room_id": getRoomId(),
-                "timestamp": videoPlayer.getCurrentTime(),
-                "user_action": "play"
-            }, function(request) {
-                window.request = request
-            });
-            // console.log(videoPlayer.getCurrentTime());
-        }
+        document.getElementById("player").addEventListener("click", function() {
+            console.log('sdfafsda');
+            var videoPlayer = YT.get('player');
+            if (videoPlayer.getPlayerState() == YT.PlayerState.PLAYING) {
+                makePostRequest('/user/timestamp', {
+                    "id": getUserId(),
+                    "room_id": getRoomId(),
+                    "timestamp": videoPlayer.getCurrentTime(),
+                    "user_action": "play"
+                }, function(request) {
+                    window.request = request
+                });
+                // console.log(videoPlayer.getCurrentTime());
+            }
+            else if (videoPlayer.getPlayerState() == YT.PlayerState.PAUSED || videoPlayer.getPlayerState() == YT.PlayerState.CUED) {
+                // videoPlayer.playVideo();
+                makePostRequest('/user/timestamp', {
+                    "id": getUserId(),
+                    "room_id": getRoomId(),
+                    "timestamp": videoPlayer.getCurrentTime(),
+                    "user_action": "pause"
+                }, function(request) {
+                    window.request = request
+                });
+                // console.log(videoPlayer.getCurrentTime());
+            }
+        });
     }
       
     
@@ -67,4 +69,21 @@ window.getRoomId = function() {
 
 window.getUserId = function() {
     return document.getElementById('user_id').title;
-}}
+}
+window.changeVideo = function() {
+    player = YT.get('player');
+    videoUrl = document.getElementById('fname').value;
+    console.log(videoUrl);
+    //player.loadVideoByUrl(videoUrl);
+    let videoUrlParsed = videoUrl.split("=")[1];
+    player.loadVideoById(videoUrlParsed);
+    
+//     makePostRequest('/user/timestamp', {
+//         "id": getUserId(),
+//         "room_id": getRoomId(),
+//         "timestamp": videoPlayer.getCurrentTime(),
+//         "user_action": "pause"
+//     }, function(request) {
+//         window.request = request
+//     });
+ }
