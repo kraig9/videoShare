@@ -32,4 +32,15 @@ class UserController < ApplicationController
         # ActionCable.server.broadcast "room_channel", content: message
         return head :ok
     end
+    
+    def videochange
+        user_action = params[:user_action]
+        current_room = Room.find(params[:room_id])
+        video_id = params[:video_id]
+        puts 'print statement from the user_controller/videochange method'
+        message = { :video_id => video_id, :user_action => user_action, :current_user => params[:id] }.to_json()
+        RoomChannel.broadcast_to current_room, content: message
+        # ActionCable.server.broadcast "room_channel", content: message
+        return head :ok
+    end
 end

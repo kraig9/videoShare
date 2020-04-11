@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :room
   
   post 'user/timestamp'
+  post 'user/videochange'
 end
