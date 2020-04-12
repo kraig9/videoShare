@@ -38,6 +38,7 @@ document.addEventListener('turbolinks:load', function() {
     received(data) {
         // Called when there's incoming data on the websocket for this channel
         data = JSON.parse(data.content);
+        console.log(data);
         if (data.current_user != getUserId()) {
             window.receivedPost = 1;
             YT.get("player").seekTo(data.timestamp);
@@ -64,7 +65,7 @@ document.addEventListener('turbolinks:load', function() {
                 //}
             }
             else if (data.user_action == "videoChange") {
-                console.log("Val++")
+                // console.log("Val++")
                 window.receivedPost++;
                 YT.get("player").cueVideoById(data.video_id);
             }
