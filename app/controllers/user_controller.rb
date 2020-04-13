@@ -43,4 +43,12 @@ class UserController < ApplicationController
         # ActionCable.server.broadcast "room_channel", content: message
         return head :ok
     end
+    
+    def chatpost
+        user_action = params[:user_action]
+        chat = params[:chat]
+        current_room = Room.find(params[:room_id])
+        message = { :chat => chat, :user_action => user_action }.to_json()
+        RoomChannel.broadcast_to current_room, content: message
+    end
 end

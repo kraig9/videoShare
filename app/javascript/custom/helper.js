@@ -3,51 +3,63 @@ window.getCsrfToken = function() {
 }
 
 window.genericHttpErrorHandler = function(error) {
-    alert(`something went wrong:  ${error}`);
+	console.log(error);
+	var status = error.status
+	var text = error.text
+    alert(`something went wrong:  ${status} : ${text}`);
 }
 
-window.makeRequest = function (url, method, data, successCallback, json=true, errorCallback=genericHttpErrorHandler) {
-	// Create the XHR request
-	var request = new XMLHttpRequest();
-	// Return it as a Promise
-	var promise = new Promise(function (resolve, reject) {
-		// Setup our listener to process compeleted requests
-		request.onreadystatechange = function () {
-			// Only run if the request is complete
-			if (request.readyState !== 4) return;
-			// Process the response
+window.sendHttpRequest = function(request, method, url, data, json) {
+	request.open(method, url, true);
+	request.setRequestHeader("X-CSRF-Token", getCsrfToken());
+	if (method == "POST") {
+	    if (json) {
+	        request.setRequestHeader("Content-Type", "application/json");
+	        data = JSON.stringify(data);
+	    }
+	}
+    request.send(data);
+}
+
+window.setupHttpHandler = function(request, resolve, reject) {
+	request.onreadystatechange = function () {
+		if (request.readyState == 4) {
 			if (request.status >= 200 && request.status < 300) {
-				// If successful
 				resolve(request);
 			} else {
-				// If failed
 				reject({
 					status: request.status,
-					statusText: request.statusText
+					text: request.statusText
 				});
 			}
-
-		};
-		// Setup our HTTP request
-		request.open(method, url, true);
-		request.setRequestHeader("X-CSRF-Token", getCsrfToken());
-		// Send the request
-		if (method == "POST") {
-		    if (json) {
-		        request.setRequestHeader("Content-Type", "application/json");
-		        data = JSON.stringify(data);
-		    }
-	        request.send(data);
 		}
+	};
+}
+
+window.makeRequest = function (method, url, data, successCallback, json, errorCallback) {
+	var request = new XMLHttpRequest();
+	var promise = new Promise(function (resolve, reject) {
+		setupHttpHandler(request, resolve, reject)
+		sendHttpRequest(request, method, url, data, json);
 	})
     .then(successCallback)
     .catch(errorCallback);
 };
 
-window.makePostRequest = function(url, data, successCallback, json=true, errorCallback=genericHttpErrorHandler) {
-    makeRequest(url, "POST", data, successCallback, json, errorCallback);
+window.makePostRequest = function(url, data, successCallback=null, json=true, errorCallback=genericHttpErrorHandler) {
+    makeRequest("POST", url, data, successCallback, json, errorCallback);
 }
 
-window.makeGetRequest = function(url, successCallback, errorCallback=genericHttpErrorHandler) {
-    makeRequest(url, "GET", null, successCallback, false, errorCallback);
+window.makeGetRequest = function(url, successCallback=null, errorCallback=genericHttpErrorHandler) {
+    makeRequest("GET", url, null, successCallback, false, errorCallback);
+}
+
+// 230.870204 -> 00:03:50
+window.secondsToString = function(seconds) {
+    var datetime = new Date(seconds * 1000);
+	return datetime.toISOString().substr(11, 8);
+    // var hours = (datetime.getHours() - 19).toString().padStart(2, '0');
+    // var mins = datetime.getMinutes().toString().padStart(2, '0');
+    // var secs = datetime.getSeconds().toString().padStart(2, '0');
+    // return `${hours}:${mins}:${secs}`
 }
