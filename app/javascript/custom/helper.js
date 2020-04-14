@@ -58,8 +58,4 @@ window.makeGetRequest = function(url, successCallback=null, errorCallback=generi
 window.secondsToString = function(seconds) {
     var datetime = new Date(seconds * 1000);
 	return datetime.toISOString().substr(11, 8);
-    // var hours = (datetime.getHours() - 19).toString().padStart(2, '0');
-    // var mins = datetime.getMinutes().toString().padStart(2, '0');
-    // var secs = datetime.getSeconds().toString().padStart(2, '0');
-    // return `${hours}:${mins}:${secs}`
 }

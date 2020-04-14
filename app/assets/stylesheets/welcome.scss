@@ -38,6 +38,7 @@ body {
     top: 90%;
     left: 45%;
     z-index: 3;
+    cursor: default;
 }
 #fullscreen {
     right: 5%;
@@ -48,14 +49,54 @@ body {
     left: 5%;
     top: 85%;
     width: 90%;
+    cursor: pointer;
 }
 .scroll {
-    height: 90%;
+    max-height: 60vh;
     background-color: #deeafa;
-    word-wrap: break-word;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .alert {
     padding-top: 0.375rem !important;
     padding-bottom: 0.375rem !important;
+}
+/* Chat containers */
+.msg {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 0.25em;
+  padding: 0.25rem;
+  margin: 0.25rem 0.05;
+  width: 75%;
+  font-size: 1em;
+  word-wrap: break-word;
+  float: right;
+  text-align: right;
+}
+
+/* Darker chat container */
+.other {
+  border-color: #ccc;
+  background-color: #ddd;
+  float: left;
+  text-align: left;
+}
+
+/* Clear floats */
+.msg::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style time text */
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #999;
 }

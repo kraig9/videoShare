@@ -23,6 +23,9 @@ window.initializeButtons = function() {
     document.getElementById("changeVideo").addEventListener("click", changeVideo);
     document.getElementById("seek").addEventListener("click", seekVideo);
     document.getElementById("fullscreen").addEventListener("click", playFullScreen);
+    document.getElementById("controls").addEventListener("mouseover", function() {
+        fadeControls(false);
+    })
     toggleVideoControls(false);
 }
 
@@ -44,13 +47,35 @@ window.increaseVolume = function() {
 
 window.overlayMouseOver = function() {
     var player = YT.get('player');
-    if (player.getVideoUrl() == 'https://www.youtube.com/watch') {
+    if (!videoLoaded()) {
         displayError(`<i class="fas fa-arrow-left"></i> Enter Youtube Link!`)
+    }
+    else {
+        fadeControls(false)
     }
 }
 
 window.overlayMouseOut = function() {
-    document.getElementById("error").innerHTML = '';
+    if (!videoLoaded()) {
+        document.getElementById("error").innerHTML = '';
+    }
+    else {
+        fadeControls(true);
+    }
+}
+
+window.fadeControls = function(fade) {
+    if (fade) {
+        window.timeoutControls = setTimeout(toggleVideoControls, 2000, false);
+    }
+    else {
+        clearTimeout(window.timeoutControls);
+        toggleVideoControls(true)
+    }
+}
+
+window.videoLoaded = function() {
+    return YT.get('player').getVideoUrl() != 'https://www.youtube.com/watch';
 }
 
 window.displayError = function (message) {
@@ -77,7 +102,7 @@ window.sendVideoMessage = function(player, action, time=-1) {
 
 window.controlVideo = function(event){
     var player = YT.get('player');
-    if (player.getVideoUrl() != 'https://www.youtube.com/watch') {
+    if (videoLoaded()) {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             sendVideoMessage(player, "pause");
         }
@@ -135,12 +160,7 @@ window.changeVideo = function() {
     else {
         show = "hidden";
     }
-    document.getElementById('seek').style.visibility = show;
-    document.getElementById('play').style.visibility = show;
-    document.getElementById('volUp').style.visibility = show;
-    document.getElementById('volDown').style.visibility = show;
-    document.getElementById('time').style.visibility = show;
-    document.getElementById('fullscreen').style.visibility = show;
+    document.getElementById('controls').style.visibility = show;
  }
  
  window.togglePlayButton = function(showPlay) {
@@ -160,14 +180,14 @@ window.changeVideo = function() {
  window.handleVideoPause = function() {
      YT.get("player").pauseVideo();
      togglePlayButton(true);
-     clearInterval(window.intervalId)
+     clearInterval(window.intervalUpdateTime)
  }
  
  window.handleVideoPlay = function() {
      YT.get("player").playVideo();
      togglePlayButton(false);
     //  window.intervalId = requestAnimationFrame(continuoslyUpdateCurrentSongTime);
-    window.intervalId = setInterval(continuoslyUpdateCurrentSongTime, 90);
+    window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
  }
  
  window.continuoslyUpdateCurrentSongTime = function() {
@@ -196,6 +216,7 @@ window.initializeTime = function(event) {
     var state = YT.get('player').getPlayerState()
     if (window.prevState == YT.PlayerState.UNSTARTED && state == YT.PlayerState.CUED) {
         updateCurrentSongTime();
+        
     }
     window.prevState = state;
 }
@@ -212,4 +233,8 @@ window.seekVideo = function(event) {
     else {
         sendVideoMessage(player, "play", videoPosition);
     }
+}
+
+window.handleChat = function(message) {
+    
 }

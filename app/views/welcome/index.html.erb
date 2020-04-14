@@ -18,7 +18,14 @@
 </div>
 <!-- Actual Body -->
 <div class="container-fluid">
-<h2 class="text-center">CirtualVouch</h2>
+<div class="row justify-content-center">
+    <div class="col p-0">
+        <%= image_tag("Logo2.svg", :style => "height:5vh; float:right", :alt => "logo") %>
+    </div>
+    <div class="col p-0">
+            <h2 class="mb-0 align-middle">CirtualVouch</h2>
+    </div>
+</div>
     <div class="row row-eq-height">
         <div class="col-8 pr-0">
             <div id="holder">
@@ -26,30 +33,61 @@
                     <div id="player" class="embed-responsive-item"></div>
                 </div>
                 <div id="overlay"></div>
-                <div id="seek" class="progress mb-2">
-                    <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="transition: none"></div>
+                <div id="controls">
+                    <div id="seek" class="progress mb-2">
+                        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="transition: none"></div>
+                    </div>
+                    <button id="play" class="btn overButtons" type="button" title="Play">
+                        <i id="playIcon" class="fas fa-play"></i>
+                    </button>
+                    <button id="volDown" class="btn overButtons" type="button" title="Volume Up">
+                        <i class="fas fa-volume-down"></i>    
+                    </button>
+                    <button id="volUp" class="btn overButtons" type="button" title="Volume Down">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div id="time" class="card" style="background-color: rgb(240, 240, 240)"><span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span></div>
+                    <button id="fullscreen" class="btn overButtons" type="button" title="Full Screen">
+                        <i class="fas fa-compress"></i>
+                    </button>
                 </div>
-                <button id="play" class="btn overButtons" type="button" title="Play">
-                    <i id="playIcon" class="fas fa-play"></i>
-                </button>
-                <button id="volDown" class="btn overButtons" type="button" title="Volume Up">
-                    <i class="fas fa-volume-down"></i>    
-                </button>
-                <button id="volUp" class="btn overButtons" type="button" title="Volume Down">
-                    <i class="fas fa-volume-up"></i>
-                </button>
-                <div id="time" class="card" style="background-color: rgb(240, 240, 240)"><span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span></div>
-                <button id="fullscreen" class="btn overButtons" type="button" title="Full Screen">
-                    <i class="fas fa-compress"></i>
-                </button>
             </div>
         </div>
         <div class="col pr-2">
             <div class="card" style="height: 100%">
-                <h2 class="card-title pb-0 text-center">Chat</h2>
+                <h2 class="card-title mb-0 text-center">Chat</h2>
                 <h6 class="card-subtitle text-center text-muted">Room ID: <%= @room.id %></h6>
-                <div class="card-body">
-                    <div class="scroll">Fuck Kraig</div>
+                <div class="card-body pt-0 pb-1">
+                    <div class="scroll">
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">Hello. How are you today?</p>
+                            <span class="time-right">11:00</span>
+                        </div>
+                            
+                        <div class="msg other">
+                            <strong>Kraig</strong>
+                            <p class="my-0">Hey! I'm fine. Thanks for asking!</p>
+                            <span class="time-left">11:01</span>
+                        </div>
+                            
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">Sweet! So, what do you wanna do today?</p>
+                            <span class="time-right">11:02</span>
+                        </div>
+                            
+                        <div class="msg other">
+                            <strong>Kraig</strong>
+                            <p class="my-0">Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+                            <span class="time-left">11:05</span>
+                        </div>
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">CODING</p>
+                            <span class="time-right">11:05</span>
+                        </div>
+                    </div>
                     <div class="input-group">
                         <input type="text" class="form-control" id="message" placeholder="Type Message">
                         <div class="input-group-append">
@@ -63,7 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="row row-eq-height pt-1">
+    <div class="row row-eq-height pt-1 pb-0">
         <div class="col-4 pr-0">
             <div class="input-group">
                 <input type="text" class="form-control" id="videoLink" placeholder="Youtube Link">
