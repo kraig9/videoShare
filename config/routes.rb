@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
  
-  root 'welcome#scene1'
+  root 'welcome#index'
   
   get 'welcome/scene1'
   
@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :room
   
   post 'user/timestamp'
+  post 'user/videochange'
+  post 'user/chatpost'
 end

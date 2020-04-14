@@ -25,11 +25,30 @@ class UserController < ApplicationController
         timestamp = params[:timestamp]
         user_action = params[:user_action]
         current_room = Room.find(params[:room_id])
-        puts 'hello!!!!!!!!'
+        puts 'print statement from the user_controller/timestamp method'
         # @sumOfAll = @user_room + @timestamp + @action
-        message = { :timestamp => timestamp, :user_action => user_action }.to_json()
+        message = { :timestamp => timestamp, :user_action => user_action, :current_user => params[:id] }.to_json()
         RoomChannel.broadcast_to current_room, content: message
         # ActionCable.server.broadcast "room_channel", content: message
         return head :ok
+    end
+    
+    def videochange
+        user_action = params[:user_action]
+        current_room = Room.find(params[:room_id])
+        video_id = params[:video_id]
+        puts 'print statement from the user_controller/videochange method'
+        message = { :video_id => video_id, :user_action => user_action, :current_user => params[:id] }.to_json()
+        RoomChannel.broadcast_to current_room, content: message
+        # ActionCable.server.broadcast "room_channel", content: message
+        return head :ok
+    end
+    
+    def chatpost
+        user_action = params[:user_action]
+        chat = params[:chat]
+        current_room = Room.find(params[:room_id])
+        message = { :chat => chat, :user_action => user_action }.to_json()
+        RoomChannel.broadcast_to current_room, content: message
     end
 end

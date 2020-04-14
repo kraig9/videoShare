@@ -1,14 +1,117 @@
 <%= content_for :includes do %>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <% end %>
-
+<!-- Hidden Variables -->
 <div
-  id="room_messages" 
-  data-channel-subscribe="room" 
-  data-room-id="<%= @room.id %>" hidden>
+    id="room_messages" 
+    data-channel-subscribe="room" 
+    data-room-id="<%= @room.id %>" hidden>
 </div>
-
-<button id='clickme'>Click Me</button>
-<div id="player"></div>
-
-<!--javascript_tag "window.initializeVideo()"-->
-<script>initializeVideo()</script>
+<div
+    id="user_id" 
+    title="<%= @user.id %>" hidden>
+</div>
+<!-- Actual Body -->
+<div class="container-fluid">
+<div class="row justify-content-center">
+    <div class="col p-0">
+        <%= image_tag("Logo2.svg", :style => "height:5vh; float:right", :alt => "logo") %>
+    </div>
+    <div class="col p-0">
+            <h2 class="mb-0 align-middle">CirtualVouch</h2>
+    </div>
+</div>
+    <div class="row row-eq-height">
+        <div class="col-8 pr-0">
+            <div id="holder">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div id="player" class="embed-responsive-item"></div>
+                </div>
+                <div id="overlay"></div>
+                <div id="controls">
+                    <div id="seek" class="progress mb-2">
+                        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="transition: none"></div>
+                    </div>
+                    <button id="play" class="btn overButtons" type="button" title="Play">
+                        <i id="playIcon" class="fas fa-play"></i>
+                    </button>
+                    <button id="volDown" class="btn overButtons" type="button" title="Volume Up">
+                        <i class="fas fa-volume-down"></i>    
+                    </button>
+                    <button id="volUp" class="btn overButtons" type="button" title="Volume Down">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div id="time" class="card" style="background-color: rgb(240, 240, 240)"><span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span></div>
+                    <button id="fullscreen" class="btn overButtons" type="button" title="Full Screen">
+                        <i class="fas fa-compress"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col pr-2">
+            <div class="card" style="height: 100%">
+                <h2 class="card-title mb-0 text-center">Chat</h2>
+                <h6 class="card-subtitle text-center text-muted">Room ID: <%= @room.id %></h6>
+                <div class="card-body pt-0 pb-1">
+                    <div class="scroll">
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">Hello. How are you today?</p>
+                            <span class="time-right">11:00</span>
+                        </div>
+                            
+                        <div class="msg other">
+                            <strong>Kraig</strong>
+                            <p class="my-0">Hey! I'm fine. Thanks for asking!</p>
+                            <span class="time-left">11:01</span>
+                        </div>
+                            
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">Sweet! So, what do you wanna do today?</p>
+                            <span class="time-right">11:02</span>
+                        </div>
+                            
+                        <div class="msg other">
+                            <strong>Kraig</strong>
+                            <p class="my-0">Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+                            <span class="time-left">11:05</span>
+                        </div>
+                        <div class="msg">
+                            <strong>You</strong>
+                            <p class="my-0">CODING</p>
+                            <span class="time-right">11:05</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="message" placeholder="Type Message">
+                        <div class="input-group-append">
+                            <button id="sendMessage" class="btn btn-primary" type="button">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button id="sendMessage" class="btn" type="button">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-eq-height pt-1 pb-0">
+        <div class="col-4 pr-0">
+            <div class="input-group">
+                <input type="text" class="form-control" id="videoLink" placeholder="Youtube Link">
+                <div class="input-group-append">
+                    <button id="changeVideo" class="btn" type="button">Change Video</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pl-0">
+            <div id="error"></div>
+        </div>
+    </div>
+</div>
