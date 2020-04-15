@@ -1,21 +1,28 @@
 <% content_for :includes do %>
-    <link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
-    <script>var __adobewebfontsappname__="dreamweaver"</script>
+    <%= stylesheet_link_tag "scene1" %>
     <script src="https://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
 <% end %>
 
-<div class="container"> 
-    <section class="hero" id="hero">
-        <%= image_tag("Logo2.svg", alt: "", width: "500", height: "500") %>
-        <h2 class="hero_header">&nbsp; Virtual Couch&nbsp;&nbsp; </h2>
-        <p class="tagline">WATCH WITH YOUR FRIENDS&nbsp;</p>
-    	<a class="maxbutton" href="https://maxbuttons.com/button-generator/"><span class='mb-text' >Join a Couch</span></a>
-    	<a class="maxbutton2" onclick="createRoom()"><span class='mb-text'>Create a Couch</span></a>
-	</section>
-    <section class="footer_banner">
-        <h2 class="hidden">Footer Banner Section </h2>
-    </section>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col text-center" style="height: 75vh">
+            <%= image_tag("Logo2.svg", :height => "100%") %>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            <h1 class="text-center"><strong>Virtual Couch</strong></h1>
+            <p class="text-center">WATCH WITH YOUR FRIENDS</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <button class="btn py-3 px-5 mr-1" href="https://maxbuttons.com/button-generator/">
+                Join a Couch
+            </button>
+            <button class="btn py-3 px-5 ml-1" onclick="createRoom()">
+                Create a Couch
+            </button>
+        </div>
+    </div>
 </div>
-<iframe width="420" height="315"
-src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe>
