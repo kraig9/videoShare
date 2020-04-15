@@ -27,8 +27,10 @@ phases:
 #       runtime: version
 #       runtime: version
     commands:
+      - ruby -v
       - gem install bundler
       - bundle install
+      
 #       - command
 #     finally:
 #       - command
