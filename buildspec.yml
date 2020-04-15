@@ -21,13 +21,14 @@ version: 0.2
 # #     logs: yes
             
 phases:
-#   install:
+  install:
 #     run-as: Linux-user-name
 #     runtime-versions:
 #       runtime: version
 #       runtime: version
-#     commands:
-#       - command
+    commands:
+      - gem install bundler
+      - bundle install
 #       - command
 #     finally:
 #       - command
@@ -64,9 +65,9 @@ phases:
 # #     base-directory: location
 # #     discard-paths: yes
 # #     file-format: JunitXml | CucumberJson | VisualStudioTrx | TestNGXml
-# # artifacts:
-# #   files:
-# #     - location
+# artifacts:
+#   files:
+#     - location
 # #     - location
 # #   name: artifact-name
 # #   discard-paths: yes
