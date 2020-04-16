@@ -1,7 +1,8 @@
 class RoomController < ApplicationController
     def new
-        @room = Room.new(params[:id])
-        
+        roomID = SecureRandom.alphanumeric(8)
+        @user = User.new()
+        @room = Room.new(roomID)
         @room.save
         redirect_to @room
     end
