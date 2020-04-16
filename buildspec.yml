@@ -27,6 +27,7 @@ phases:
 #       runtime: version
 #       runtime: version
     commands:
+      - sed -i 's/ruby '2.6.3'/ruby '2.6'/g' Gemfile
       - gem install bundler
       - bundle install
       
