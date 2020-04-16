@@ -68,9 +68,9 @@ phases:
 # #     base-directory: location
 # #     discard-paths: yes
 # #     file-format: JunitXml | CucumberJson | VisualStudioTrx | TestNGXml
-artifacts:
-  files:
-    - deploy/**/*
+# artifacts:
+#   files:
+#     - deploy/**/*
 # #     - location
 # #   name: artifact-name
 # #   discard-paths: yes
