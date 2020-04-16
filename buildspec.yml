@@ -27,8 +27,8 @@ phases:
 #       runtime: version
 #       runtime: version
     commands:
-      - ruby -v
-      - sed -i 's/ruby '2.6.3'/ruby '2.6'/g' Gemfile
+      - rbenv install 2.6.3
+      # - sed -i 's/ruby '2.6.3'/ruby '2.6'/g' Gemfile
       - gem install bundler
       - bundle install
       
