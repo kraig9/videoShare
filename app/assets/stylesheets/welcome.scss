@@ -51,7 +51,8 @@ body {
     width: 90%;
     cursor: pointer;
 }
-.scroll {
+#scroll {
+    height: 60vh;
     max-height: 60vh;
     background-color: #deeafa;
     overflow-y: auto;
@@ -64,9 +65,9 @@ body {
 .msg {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   padding: 0.25rem;
-  margin: 0.25rem 0.05;
+  margin: 0.25rem 0.1rem;
   width: 75%;
   font-size: 1em;
   word-wrap: break-word;
@@ -100,9 +101,6 @@ body {
   float: left;
   color: #999;
 }
-.logo {
-	letter-spacing: 0.2rem;
-	color: #edf0fa !important;
-	display: inline;
-	font-family: source-sans-pro !important;
+#error {
+    width: 15rem;
 }

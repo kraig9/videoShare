@@ -23,6 +23,13 @@ window.initializeButtons = function() {
     document.getElementById("changeVideo").addEventListener("click", changeVideo);
     document.getElementById("seek").addEventListener("click", seekVideo);
     document.getElementById("fullscreen").addEventListener("click", playFullScreen);
+    document.getElementById("sendChat").addEventListener("click", chat);
+    document.getElementById("message").addEventListener("keydown", function(event){
+        if (event.keyCode === 13) { 
+            event.preventDefault();
+            document.getElementById("sendChat").click();
+        }
+    });
     document.getElementById("controls").addEventListener("mouseover", function() {
         fadeControls(false);
     })
@@ -186,18 +193,11 @@ window.changeVideo = function() {
  window.handleVideoPlay = function() {
      YT.get("player").playVideo();
      togglePlayButton(false);
-    //  window.intervalId = requestAnimationFrame(continuoslyUpdateCurrentSongTime);
     window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
  }
  
  window.continuoslyUpdateCurrentSongTime = function() {
     updateCurrentSongTime();
-    // if (YT.get('player').getPlayerState() == YT.PlayerState.PLAYING) {
-    //     requestAnimationFrame(continuoslyUpdateCurrentSongTime);
-    // }
-    // else {
-    //     window.cancelAnimationFrame(window.intervalId);
-    // }
 }
 
 window.updateCurrentSongTime = function() {
@@ -235,6 +235,46 @@ window.seekVideo = function(event) {
     }
 }
 
-window.handleChat = function(message) {
-    
+window.sendChatMessage = function(message) {
+    makePostRequest('/user/chatpost', {
+        "id": getUserId(),
+        "room_id": getRoomId(),
+        "user_action": "chat",
+        "chat": message
+    })
+}
+
+window.chat = function(event) {
+    event.preventDefault();
+    var message = document.getElementById("message").value;
+    if (message.trim() != "") {
+        sendChatMessage(message);
+    }
+    document.getElementById("message").value = "";
+}
+
+window.addChat = function(message, time, isSelf=true, user='') {
+    var className = "msg other";
+    if (isSelf) {
+        user = 'You';
+        className = "msg";
+    }
+    time = new Date(time * 1000).toLocaleTimeString().substr(0, 5)
+    var newMessage = document.createElement("div");
+    newMessage.className = className;
+    newMessage.innerHTML = 
+        `<strong>${user}</strong>
+        <p class="my-0">${message}</p>
+        <span class="time-right">${time}</span>`;
+    document.getElementById("scroll").appendChild(newMessage);
+    newMessage.scrollIntoView();
+}
+
+window.handleChat = function(message, time, id, name) {
+    if (id == getUserId()) {
+        addChat(message, time);
+    }
+    else {
+        addChat(message, time, false, name);
+    }
 }

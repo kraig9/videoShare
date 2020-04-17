@@ -28,7 +28,7 @@ document.addEventListener('turbolinks:load', function() {
                 handleVideoChange(data.video_id);
             }
             else if (data.user_action == "chat"){
-                handleChat(data.chat);
+                handleChat(data.chat, data.time, data.id, data.name);
             }
             else {
                 alert("Invalid Action!");
