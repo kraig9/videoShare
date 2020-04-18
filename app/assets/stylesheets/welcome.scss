@@ -91,16 +91,25 @@ body {
 }
 
 /* Style time text */
-.time-right {
-  float: right;
-  color: #aaa;
+.msg > span {
+    float: right;
+    color: #aaa;
 }
 
-/* Style time text */
-.time-left {
-  float: left;
-  color: #999;
+.msg.other > span {
+    float: left;
+    color: #999;
 }
+
 #error {
     width: 15rem;
 }
+
+// .time-right {
+
+// }
+
+/* Style time text */
+// .time-left {
+  
+// }

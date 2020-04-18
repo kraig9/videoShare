@@ -259,13 +259,13 @@ window.addChat = function(message, time, isSelf=true, user='') {
         user = 'You';
         className = "msg";
     }
-    time = new Date(time * 1000).toLocaleTimeString().substr(0, 5)
+    time = new Date(time * 1000).toLocaleTimeString().padStart(11, '0').substr(0, 5);
     var newMessage = document.createElement("div");
     newMessage.className = className;
     newMessage.innerHTML = 
         `<strong>${user}</strong>
         <p class="my-0">${message}</p>
-        <span class="time-right">${time}</span>`;
+        <span>${time}</span>`;
     document.getElementById("scroll").appendChild(newMessage);
     newMessage.scrollIntoView();
 }
