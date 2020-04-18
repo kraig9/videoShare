@@ -20,8 +20,6 @@ class UserController < ApplicationController
     end
     
     def timestamp
-        #@user_room = User.select("room_id = " + params[:id])
-        #user_room = User.where('room_id = ?', params[:room_id])
         timestamp = params[:timestamp]
         user_action = params[:user_action]
         current_room = Room.find(params[:room_id])
@@ -38,17 +36,29 @@ class UserController < ApplicationController
         current_room = Room.find(params[:room_id])
         video_id = params[:video_id]
         puts 'print statement from the user_controller/videochange method'
-        message = { :video_id => video_id, :user_action => user_action, :current_user => params[:id] }.to_json()
+        message = { 
+            :video_id => video_id,
+            :user_action => user_action,
+            :current_user => params[:id]
+        }.to_json()
         RoomChannel.broadcast_to current_room, content: message
         # ActionCable.server.broadcast "room_channel", content: message
         return head :ok
     end
     
     def chatpost
+        sender = User.find(params[:id]).username
         user_action = params[:user_action]
         chat = params[:chat]
         current_room = Room.find(params[:room_id])
-        message = { :chat => chat, :user_action => user_action }.to_json()
+        time = Time.now.to_i
+        message = {
+            :chat => chat, 
+            :user_action => user_action, 
+            :id => params[:id], 
+            :name => sender,
+            :time => time
+        }.to_json()
         RoomChannel.broadcast_to current_room, content: message
     end
 end

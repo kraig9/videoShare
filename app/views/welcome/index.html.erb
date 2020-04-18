@@ -1,11 +1,12 @@
 <%= content_for :includes do %>
     <%= stylesheet_link_tag "welcome" %>
+    <%= javascript_pack_tag 'videoShare' %>
     <script src="https://www.youtube.com/iframe_api"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <% end %>
 <!-- Hidden Variables -->
 <div
-    id="room_messages" 
+    id="room_id" 
     data-channel-subscribe="room" 
     data-room-id="<%= @room.id %>" hidden>
 </div>
@@ -41,7 +42,9 @@
                     <button id="volUp" class="btn overButtons" type="button" title="Volume Down">
                         <i class="fas fa-volume-up"></i>
                     </button>
-                    <div id="time" class="card" style="background-color: rgb(240, 240, 240)"><span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span></div>
+                    <div id="time" class="card" style="background-color: rgb(240, 240, 240)">
+                        <span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span>
+                    </div>
                     <button id="fullscreen" class="btn overButtons" type="button" title="Full Screen">
                         <i class="fas fa-compress"></i>
                     </button>
@@ -53,43 +56,14 @@
                 <h2 class="card-title mb-0 text-center">Chat</h2>
                 <h6 class="card-subtitle text-center text-muted">Room ID: <%= @room.id %></h6>
                 <div class="card-body pt-0 pb-1">
-                    <div class="scroll">
-                        <div class="msg">
-                            <strong>You</strong>
-                            <p class="my-0">Hello. How are you today?</p>
-                            <span class="time-right">11:00</span>
-                        </div>
-                            
-                        <div class="msg other">
-                            <strong>Kraig</strong>
-                            <p class="my-0">Hey! I'm fine. Thanks for asking!</p>
-                            <span class="time-left">11:01</span>
-                        </div>
-                            
-                        <div class="msg">
-                            <strong>You</strong>
-                            <p class="my-0">Sweet! So, what do you wanna do today?</p>
-                            <span class="time-right">11:02</span>
-                        </div>
-                            
-                        <div class="msg other">
-                            <strong>Kraig</strong>
-                            <p class="my-0">Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-                            <span class="time-left">11:05</span>
-                        </div>
-                        <div class="msg">
-                            <strong>You</strong>
-                            <p class="my-0">CODING</p>
-                            <span class="time-right">11:05</span>
-                        </div>
-                    </div>
+                    <div id="scroll"></div>
                     <div class="input-group">
                         <input type="text" class="form-control" id="message" placeholder="Type Message">
                         <div class="input-group-append">
-                            <button id="sendMessage" class="btn btn-primary" type="button">
+                            <button class="btn btn-primary" type="button">
                                 <i class="fas fa-microphone"></i>
                             </button>
-                            <button id="sendMessage" class="btn" type="button">Send</button>
+                            <button id="sendChat" class="btn" type="button">Send</button>
                         </div>
                     </div>
                 </div>
