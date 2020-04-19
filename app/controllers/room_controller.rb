@@ -13,8 +13,8 @@ class RoomController < ApplicationController
     def create
         roomName = SecureRandom.alphanumeric(8)
         @room = Room.new('room_name' => roomName)
-        @user = User.new('room_id' => @room, 'username' => params[:username])
         @room.save
+        @user = User.new('room_id' => @room.id, 'username' => params[:username])
         @user.save
         cookies[:user_id] = @user.id
         cookies[:room_id] = @room.id
