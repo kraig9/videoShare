@@ -8,18 +8,18 @@
 <div
     id="room_id" 
     data-channel-subscribe="room" 
-    data-room-id="<%= @room.id %>" hidden>
+    data-room-id="<%= @roomID %>" hidden>
 </div>
 <div
     id="user_id" 
-    title="<%= @user.id %>" hidden>
+    title="<%= @userID %>" hidden>
 </div>
 <!-- Actual Body -->
 <div class="container-fluid">
 <div class="row justify-content-center">
     <div class="col p-0 text-center align-middle">
         <%= image_tag("Logo2.svg", :style => "height:2.5rem; display: inline", :alt => "logo") %>
-        <h1 class="logo mb-0 align-middle"><strong>Virtual Couch</strong></h1>
+        <h1 class="logo mb-0 align-middle" style="display: inline"><strong>Virtual Couch</strong></h1>
     </div>
 </div>
     <div class="row row-eq-height">
@@ -54,7 +54,7 @@
         <div class="col pr-2">
             <div class="card" style="min-height: 75vh">
                 <h2 class="card-title mb-0 text-center">Chat</h2>
-                <h6 class="card-subtitle text-center text-muted">Room ID: <%= @room.id %></h6>
+                <h6 class="card-subtitle text-center text-muted mb-1">Room ID: <%= @roomName %></h6>
                 <div class="card-body pt-0 pb-1">
                     <div id="scroll"></div>
                     <div class="input-group">

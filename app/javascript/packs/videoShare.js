@@ -100,8 +100,6 @@ window.sendVideoMessage = function(player, action, time=-1) {
         time = player.getCurrentTime();
     }
     makePostRequest('/user/timestamp', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "timestamp": time,
         "user_action": action
     });
@@ -129,8 +127,6 @@ window.getUserId = function() {
 
 window.sendChangeVideo = function(player, videoId) {
     makePostRequest('/user/videochange', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "user_action": "videoChange",
         "video_id": videoId
     });
@@ -184,13 +180,15 @@ window.changeVideo = function() {
     toggleVideoControls(true);
  }
  
- window.handleVideoPause = function() {
+ window.handleVideoPause = function(timestamp) {
+     YT.get("player").seekTo(timestamp);
      YT.get("player").pauseVideo();
      togglePlayButton(true);
      clearInterval(window.intervalUpdateTime)
  }
  
- window.handleVideoPlay = function() {
+ window.handleVideoPlay = function(timestamp) {
+     YT.get("player").seekTo(timestamp);
      YT.get("player").playVideo();
      togglePlayButton(false);
     window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
@@ -237,15 +235,12 @@ window.seekVideo = function(event) {
 
 window.sendChatMessage = function(message) {
     makePostRequest('/user/chatpost', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "user_action": "chat",
         "chat": message
     })
 }
 
 window.chat = function(event) {
-    event.preventDefault();
     var message = document.getElementById("message").value;
     if (message.trim() != "") {
         sendChatMessage(message);

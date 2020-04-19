@@ -12,7 +12,7 @@ P {
 	font-size: 1.15rem;
 	letter-spacing: 0.05rem;
 }
-button {
+.main {
 	background-color: rgb(75, 85, 198);
 	border-width: 0.125rem !important;
 	border-color: rgb(80, 90, 199) !important;
@@ -21,7 +21,7 @@ button {
 	border-radius: 1rem !important;
 	font-size: 1.25rem !important;
 }
-button:hover {
+.main:hover {
 	background-color: white !important;
 	color: rgb(75, 85, 198) !important;
 }
