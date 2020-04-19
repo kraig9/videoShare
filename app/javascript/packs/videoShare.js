@@ -180,13 +180,15 @@ window.changeVideo = function() {
     toggleVideoControls(true);
  }
  
- window.handleVideoPause = function() {
+ window.handleVideoPause = function(timestamp) {
+     YT.get("player").seekTo(timestamp);
      YT.get("player").pauseVideo();
      togglePlayButton(true);
      clearInterval(window.intervalUpdateTime)
  }
  
- window.handleVideoPlay = function() {
+ window.handleVideoPlay = function(timestamp) {
+     YT.get("player").seekTo(timestamp);
      YT.get("player").playVideo();
      togglePlayButton(false);
     window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
@@ -239,7 +241,6 @@ window.sendChatMessage = function(message) {
 }
 
 window.chat = function(event) {
-    event.preventDefault();
     var message = document.getElementById("message").value;
     if (message.trim() != "") {
         sendChatMessage(message);

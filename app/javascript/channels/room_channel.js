@@ -17,12 +17,11 @@ document.addEventListener('turbolinks:load', function() {
             // Called when there's incoming data on the websocket for this channel
             data = JSON.parse(data.content);
             console.log(data);
-             YT.get("player").seekTo(data.timestamp);
             if (data.user_action == "play") {
-                handleVideoPlay();
+                handleVideoPlay(data.timestamp);
             }
             else if (data.user_action == "pause") {
-                handleVideoPause();
+                handleVideoPause(data.timestamp);
             }
             else if (data.user_action == "videoChange") {
                 handleVideoChange(data.video_id);

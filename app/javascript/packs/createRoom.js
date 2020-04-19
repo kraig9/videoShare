@@ -20,7 +20,6 @@ window.joinRoom = function(){
         }, function(request) {
             window.location = request.responseText;
         });
-        document.getElementById("roomId").value = "";
         document.getElementById("user").value = "";
     }
 }

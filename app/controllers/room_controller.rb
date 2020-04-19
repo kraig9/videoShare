@@ -29,11 +29,13 @@ class RoomController < ApplicationController
     end
     
     def join
-       @room = Room.where(:room_name => params[:room_name])
-       @user = User.new('room' => @room, 'username' => params[:username])
+       room_id = Room.where(:room_name => params[:room_name]).ids[0]
+       @room = Room.find(room_id)
+       @user = User.new('room_id' => room_id, 'username' => params[:username])
        @user.save
        cookies[:user_id] = @user.id
        cookies[:room_id] = @room.id
-       render 'welcome/index'
+       cookies[:room_name] = @room.room_name
+       render plain: 'welcome/index'
     end
 end
