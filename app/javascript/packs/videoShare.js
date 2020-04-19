@@ -100,8 +100,6 @@ window.sendVideoMessage = function(player, action, time=-1) {
         time = player.getCurrentTime();
     }
     makePostRequest('/user/timestamp', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "timestamp": time,
         "user_action": action
     });
@@ -129,8 +127,6 @@ window.getUserId = function() {
 
 window.sendChangeVideo = function(player, videoId) {
     makePostRequest('/user/videochange', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "user_action": "videoChange",
         "video_id": videoId
     });
@@ -237,8 +233,6 @@ window.seekVideo = function(event) {
 
 window.sendChatMessage = function(message) {
     makePostRequest('/user/chatpost', {
-        "id": getUserId(),
-        "room_id": getRoomId(),
         "user_action": "chat",
         "chat": message
     })

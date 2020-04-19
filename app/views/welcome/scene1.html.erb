@@ -17,32 +17,53 @@
     </div>
     <div class="row justify-content-center">
         <div class="col text-center">
-            <button class="btn py-3 px-5 mr-1" data-toggle="modal" data-target="#joinRoomModal">
+            <button class="btn py-3 px-5 mr-1 main" data-toggle="modal" data-target="#joinRoomModal">
                 Join a Couch
             </button>
-            <button class="btn py-3 px-5 ml-1" data-toggle="modal" data-target="#createRoomModal">
+            <button class="btn py-3 px-5 ml-1 main" data-toggle="modal" data-target="#createRoomModal">
                 Create a Couch
             </button>
         </div>
     </div>
     
     <div class="modal fade" id="createRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Room</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="form-control" id="username" placeholder="Youtube Link">
-                    <div class="input-group-append">
-                        <button id="changeVideo" class="btn" type="button">Change Video</button>
-                    </div>                </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <div class="input-group-append">
+                            <button id="changeVideo" class="btn" type="button" onclick="createRoom()">Create Room</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="joinRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Join Room</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="roomId" placeholder="Room ID">
+                        <input type="text" class="form-control" id="user" placeholder="Username">
+                        <div class="input-group-append">
+                            <button id="changeVideo" class="btn" type="button" onclick="joinRoom()">Join Room</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

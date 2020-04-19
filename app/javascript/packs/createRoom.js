@@ -1,19 +1,26 @@
 window.createRoom = function(){
     var username = document.getElementById("username").value.trim();
     if (username != "") {
-        makePostRequest('/room/new', {
+        makePostRequest('/room', {
             "username": username
+        }, function(request) {
+            window.location = request.responseText;
         });
-        document.getElementById("joinRoomText").value = "";
+        document.getElementById("username").value = "";
     }
 }
 
 window.joinRoom = function(){
-    var roomId = document.getElementById("joinRoomText").value.trim();
-    if (roomId != "") {
+    var roomId = document.getElementById("roomId").value.trim();
+    var user = document.getElementById("user").value.trim();
+    if (roomId != "" && user != "") {
         makePostRequest('/room/join', {
-            "room_id": roomId
+            "room_name": roomId,
+            "username": user
+        }, function(request) {
+            window.location = request.responseText;
         });
-        document.getElementById("joinRoomText").value = "";
+        document.getElementById("roomId").value = "";
+        document.getElementById("user").value = "";
     }
 }

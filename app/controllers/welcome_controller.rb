@@ -1,8 +1,12 @@
 class WelcomeController < ApplicationController
   def index
-    if session.key?("current_id")
-      @room = Room.find(session[:current_id])
-      @user = User.find(1)
+    if not cookies.key?("user_id")
+      render :js => "window.location = '/welcome/scene1'"
+    else
+      @roomID = cookies[:room_id]
+      @roomName = cookies[:room_name]
+      @userID = cookies[:user_id]
+      render 'welcome/index'
     end
   end
   

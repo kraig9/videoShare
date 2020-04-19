@@ -8,11 +8,12 @@
 <div
     id="room_id" 
     data-channel-subscribe="room" 
-    data-room-id="<%= @room.id %>" hidden>
+    data-room-id="<%= @roomID %>" hidden>
 </div>
 <div
-    id="user_id" 
-    title="<%= @user.id %>" hidden>
+    id="room_id" 
+    data-channel-subscribe="room" 
+    data-room-id="<%= @userID %>" hidden>
 </div>
 <!-- Actual Body -->
 <div class="container-fluid">
@@ -54,7 +55,7 @@
         <div class="col pr-2">
             <div class="card" style="min-height: 75vh">
                 <h2 class="card-title mb-0 text-center">Chat</h2>
-                <h6 class="card-subtitle text-center text-muted">Room ID: <%= @room.id %></h6>
+                <h6 class="card-subtitle text-center text-muted">Room ID: <%= @roomName %></h6>
                 <div class="card-body pt-0 pb-1">
                     <div id="scroll"></div>
                     <div class="input-group">
