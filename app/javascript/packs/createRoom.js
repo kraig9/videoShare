@@ -3,8 +3,8 @@ window.createRoom = function(){
     if (username != "") {
         makePostRequest('/room', {
             "username": username
-        }, function(request) {
-            window.location = request.responseText;
+        }, function(responserequest) {
+            window.location = response.responseText;
         });
         document.getElementById("username").value = "";
     }
@@ -17,9 +17,15 @@ window.joinRoom = function(){
         makePostRequest('/room/join', {
             "room_name": roomId,
             "username": user
-        }, function(request) {
-            window.location = request.responseText;
-        });
+        }, function(response) {
+            window.location = response.responseText;
+        }, function(response) {
+            console.log(response);
+            if (response.status == 404) {
+                
+            }
+        }
+        );
         document.getElementById("user").value = "";
     }
 }

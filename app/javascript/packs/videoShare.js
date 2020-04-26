@@ -14,6 +14,7 @@ window.onYouTubeIframeAPIReady = function() {
 }
 
 window.initializeButtons = function() {
+    window.addEventListener("beforeunload", handleUserLeaving);
     document.getElementById('overlay').addEventListener('mouseover', overlayMouseOver);
     document.getElementById('overlay').addEventListener('mouseout', overlayMouseOut);
     document.getElementById("overlay").addEventListener("click", controlVideo);
@@ -42,6 +43,11 @@ window.decreaseVolume = function() {
     if (currentVolume != 0) {
         player.setVolume(currentVolume - 10);
     }
+}
+
+window.handleUserLeaving = function(event) {
+    e.preventDefault();
+    e.returnValue = 'You are about to leave this couch.  Are you sure?';
 }
 
 window.increaseVolume = function() {
@@ -137,13 +143,13 @@ window.changeVideo = function() {
     var videoUrl = document.getElementById('videoLink').value;
     var splitUrl = videoUrl.split("=");
     if (splitUrl.length > 1) {
-        if (splitUrl[0] == "https://www.youtube.com/watch?v") {
+        // if (splitUrl[0] == "https://www.youtube.com/watch?v") {
             if (splitUrl[1].length >= 11) {
                 var videoId = splitUrl[1].substr(0, 11);
                 sendChangeVideo(player, videoId);
                 return;
             }
-        }
+        // }
     }
     displayError('Invalid Youtube URL!')
  }
@@ -178,6 +184,7 @@ window.changeVideo = function() {
  window.handleVideoChange = function(videoId) {
     YT.get("player").cueVideoById(videoId);
     toggleVideoControls(true);
+    fadeControls(true);
  }
  
  window.handleVideoPause = function(timestamp) {
