@@ -62,7 +62,7 @@ class UserController < ApplicationController
         RoomChannel.broadcast_to current_room, content: message
     end
     
-    def destroy
+    def leaveroom
          User.find(cookies[:user_id]).destroy
          if User.find(:room_id => cookies[:room_id]) == nil
              Room.find(cookies[:room_id]).destroy
