@@ -61,4 +61,8 @@ class UserController < ApplicationController
         }.to_json()
         RoomChannel.broadcast_to current_room, content: message
     end
+    
+    def destroy
+         User.find(cookies[:user_id]).destroy
+    end
 end
