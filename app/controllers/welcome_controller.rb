@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
   def index
+    puts "INDEX"
+    puts cookies[:user_id]
     if not cookies.key?("user_id")
       render :js => "window.location = '/welcome/scene1'"
     else
@@ -9,7 +11,7 @@ class WelcomeController < ApplicationController
       render 'welcome/index'
     end
   end
-  
+
   def scene1
   end
 end

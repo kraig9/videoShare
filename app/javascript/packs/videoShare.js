@@ -46,9 +46,8 @@ window.decreaseVolume = function() {
 }
 
 window.handleUserLeaving = function(e) {
-    makeDeleteRequest(`/user/${parseInt(getUserId())}`);
-    document.cookie = null;
-    e.returnValue = '';
+    makePostRequest('/user/leaveroom');
+    this.document.cookie = '';
 }
 
 window.increaseVolume = function() {
