@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   post 'user/videochange'
   post 'user/chatpost'
   post 'room/join'
+  post 'user/leaveroom'
 end
