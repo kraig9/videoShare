@@ -46,6 +46,8 @@ window.decreaseVolume = function() {
 }
 
 window.handleUserLeaving = function(e) {
+    makeDeleteRequest(`/user/${parseInt(getUserId())}`);
+    document.cookie = null;
     e.returnValue = '';
 }
 
