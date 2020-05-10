@@ -3,7 +3,7 @@ window.createRoom = function(){
     if (username != "") {
         makePostRequest('/room', {
             "username": username
-        }, function(responserequest) {
+        }, function(response) {
             window.location = response.responseText;
         });
         document.getElementById("username").value = "";
@@ -22,7 +22,7 @@ window.joinRoom = function(){
         }, function(response) {
             console.log(response);
             if (response.status == 404) {
-                
+
             }
         }
         );
