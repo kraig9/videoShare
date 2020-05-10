@@ -67,8 +67,8 @@ class UserController < ApplicationController
         if User.where(room_id: cookies[:room_id]).length == 0
             Room.find(cookies[:room_id]).destroy
         end
-        cookies.delete :user_id
-        cookies.delete :room_id
-        cookies.delete :room_name
+        cookies.delete('user_id')
+        cookies.delete('room_id')
+        cookies.delete('room_name')
     end
 end
