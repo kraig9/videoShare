@@ -52,6 +52,10 @@ window.makeGetRequest = function(url, successCallback=null, errorCallback=generi
     makeRequest("GET", url, null, successCallback, false, errorCallback);
 }
 
+window.makeDeleteRequest = function(url, errorCallback=genericHttpErrorHandler) {
+	makeRequest("DELETE", url, null, null, false, errorCallback);
+}
+
 // 230.870204 -> 00:03:50
 window.secondsToString = function(seconds) {
     var datetime = new Date(seconds * 1000);
