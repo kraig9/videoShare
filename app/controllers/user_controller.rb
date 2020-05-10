@@ -64,5 +64,8 @@ class UserController < ApplicationController
     
     def destroy
          User.find(cookies[:user_id]).destroy
+         if User.find(:room_id => cookies[:room_id]) == nil
+             Room.find(cookies[:room_id]).destroy
+         end
     end
 end
