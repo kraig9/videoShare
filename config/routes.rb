@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get '/video/index'
-  get '/welcome/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  # root 'welcome#scene1'
-
+  root 'welcome#redirect'
+  get '/video/index'
+  get '/welcome/index'
   get '/welcome/scene1'
+  get '/welcome/from_outside_controller'
 
   resources :user
   resources :room
