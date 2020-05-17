@@ -14,7 +14,6 @@ class WelcomeController < ApplicationController
   end
 
   def index
-    puts "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
     puts session[:user_id]
     if is_authenticated()
       @roomID = session[:room_id]
