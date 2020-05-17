@@ -26,3 +26,29 @@ window.joinRoom = function(){
         document.getElementById("user").value = "";
     }
 }
+
+//wait to add the event listeners until the page is loaded
+window.onload = function(){
+    //if user presses enter act like they clicked the submit button
+    document.getElementById("roomId").addEventListener('keyup', function (e) {
+        if (e.keyCode == 13) {
+            // if the user pushes enter in the textbox join the room
+            document.getElementById("joinRoomButton").click();
+        }
+    });
+    //if user presses enter act like they clicked the submit button
+    document.getElementById("user").addEventListener('keyup', function (e) {
+        if (e.keyCode == 13) {
+            // if the user pushes enter in the textbox join the room
+            document.getElementById("joinRoomButton").click();
+        }
+    });
+
+    //if user presses enter act like they clicked the submit button
+    document.getElementById("username").addEventListener('keyup', function (e) {
+        if (e.keyCode == 13) {
+            // if the user pushes enter in the textbox create the room
+            document.getElementById("createRoomButton").click();
+        }
+    });
+}
