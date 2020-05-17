@@ -64,9 +64,21 @@ class UserController < ApplicationController
     end
 
     def leaveroom
-        User.find(session[:user_id]).destroy
+        user = User.find(session[:user_id])
+        room = Room.find(session[:room_id])
+        username = user.username
+        time = Time.now.to_i
+        message = {
+            :chat => "#{username} left the couch!",
+            :user_action => 'chat',
+            :id => 0,
+            :name => 'SERVER INFO',
+            :time => time
+        }.to_json()
+        RoomChannel.broadcast_to room, content: message
+        user.destroy
         if User.where(room_id: session[:room_id]).length == 0
-            Room.find(session[:room_id]).destroy
+            room.destroy
         end
         reset_session
         redirect_to '/welcome/scene1'

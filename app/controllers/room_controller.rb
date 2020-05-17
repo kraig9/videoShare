@@ -11,6 +11,15 @@ class RoomController < ApplicationController
         session[:user_id] = @user.id
         session[:room_id] = @room.id
         session[:room_name] = @room.room_name
+        time = Time.now.to_i
+        message = {
+            :chat => "#{params[:username]} joined the couch!",
+            :user_action => 'chat',
+            :id => 0,
+            :name => 'SERVER INFO',
+            :time => time
+        }.to_json()
+        RoomChannel.broadcast_to @room, content: message
         redirect_to '/welcome/from_outside_controller'
         return
     end
@@ -33,6 +42,15 @@ class RoomController < ApplicationController
         session[:user_id] = @user.id
         session[:room_id] = @room.id
         session[:room_name] = @room.room_name
+        time = Time.now.to_i
+        message = {
+            :chat => "#{params[:username]} joined the couch!",
+            :user_action => 'chat',
+            :id => 0,
+            :name => 'SERVER INFO',
+            :time => time
+        }.to_json()
+        RoomChannel.broadcast_to @room, content: message
         redirect_to '/welcome/from_outside_controller'
     end
 end
