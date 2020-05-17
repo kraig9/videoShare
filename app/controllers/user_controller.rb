@@ -47,7 +47,6 @@ class UserController < ApplicationController
     end
 
     def chatpost
-        puts session[:user_id]
         sender = User.find(session[:user_id]).username
         user_action = params[:user_action]
         chat = params[:chat]
@@ -66,16 +65,7 @@ class UserController < ApplicationController
     def leaveroom
         user = User.find(session[:user_id])
         room = Room.find(session[:room_id])
-        username = user.username
-        time = Time.now.to_i
-        message = {
-            :chat => "#{username} left the couch!",
-            :user_action => 'chat',
-            :id => 0,
-            :name => 'SERVER INFO',
-            :time => time
-        }.to_json()
-        RoomChannel.broadcast_to room, content: message
+        send_message user.username, room, true
         user.destroy
         if User.where(room_id: session[:room_id]).length == 0
             room.destroy
