@@ -47,7 +47,6 @@ window.decreaseVolume = function() {
 
 window.handleUserLeaving = function(e) {
     makePostRequest('/user/leaveroom');
-    this.document.cookie = '';
 }
 
 window.increaseVolume = function() {
