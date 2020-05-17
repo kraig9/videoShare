@@ -7,18 +7,17 @@ class RoomChannel < ApplicationCable::Channel
     # stream_from User.where('room_id = ?', params[:room_id])
     stream_for room
   end
-  
+
   def connect
-    self.room_id = User.find_by(id: cookies.encrypted[:user_id])[:room_id]
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
-  
+
   def room
     Room.find(params[:room_id])
   end
-  
-  
+
+
 end
