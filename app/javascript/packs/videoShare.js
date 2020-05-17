@@ -46,6 +46,7 @@ window.decreaseVolume = function() {
 }
 
 window.handleUserLeaving = function(e) {
+    e.returnValue = 'Leaving Room!';
     makePostRequest('/user/leaveroom');
 }
 

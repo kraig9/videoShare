@@ -19,13 +19,10 @@ window.joinRoom = function(){
             "username": user
         }, function(response) {
             window.location = response.responseText;
-        }, function(response) {
-            console.log(response);
-            if (response.status == 404) {
-
-            }
-        }
-        );
+        }, function(error) {
+            console.log(error);
+            alert(error);
+        });
         document.getElementById("user").value = "";
     }
 }

@@ -64,7 +64,6 @@ class UserController < ApplicationController
     end
 
     def leaveroom
-        puts "LEAVING ROOM"
         User.find(session[:user_id]).destroy
         if User.where(room_id: session[:room_id]).length == 0
             Room.find(session[:room_id]).destroy
