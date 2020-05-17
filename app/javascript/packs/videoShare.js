@@ -14,6 +14,7 @@ window.onYouTubeIframeAPIReady = function() {
 }
 
 window.initializeButtons = function() {
+    window.addEventListener('beforeunload', handleUserLeaving);
     document.getElementById('overlay').addEventListener('mouseover', overlayMouseOver);
     document.getElementById('overlay').addEventListener('mouseout', overlayMouseOut);
     document.getElementById("overlay").addEventListener("click", controlVideo);
@@ -25,7 +26,7 @@ window.initializeButtons = function() {
     document.getElementById("fullscreen").addEventListener("click", playFullScreen);
     document.getElementById("sendChat").addEventListener("click", chat);
     document.getElementById("message").addEventListener("keydown", function(event){
-        if (event.keyCode === 13) { 
+        if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("sendChat").click();
         }
@@ -42,6 +43,11 @@ window.decreaseVolume = function() {
     if (currentVolume != 0) {
         player.setVolume(currentVolume - 10);
     }
+}
+
+window.handleUserLeaving = function(e) {
+    e.returnValue = 'Leaving Room!';
+    makePostRequest('/user/leaveroom');
 }
 
 window.increaseVolume = function() {
@@ -137,17 +143,17 @@ window.changeVideo = function() {
     var videoUrl = document.getElementById('videoLink').value;
     var splitUrl = videoUrl.split("=");
     if (splitUrl.length > 1) {
-        if (splitUrl[0] == "https://www.youtube.com/watch?v") {
+        // if (splitUrl[0] == "https://www.youtube.com/watch?v") {
             if (splitUrl[1].length >= 11) {
                 var videoId = splitUrl[1].substr(0, 11);
                 sendChangeVideo(player, videoId);
                 return;
             }
-        }
+        // }
     }
     displayError('Invalid Youtube URL!')
  }
- 
+
  window.playFullScreen = function() {
     var player = document.getElementById('player');
     var requestFullScreen = player.requestFullScreen || player.mozRequestFullScreen || player.webkitRequestFullScreen;
@@ -155,7 +161,7 @@ window.changeVideo = function() {
         requestFullScreen.bind(player)();
     }
  }
- 
+
  window.toggleVideoControls = function(show) {
     if (show) {
         show = "visible";
@@ -165,7 +171,7 @@ window.changeVideo = function() {
     }
     document.getElementById('controls').style.visibility = show;
  }
- 
+
  window.togglePlayButton = function(showPlay) {
      if (showPlay) {
          document.getElementById("playIcon").className = "fas fa-play";
@@ -174,26 +180,27 @@ window.changeVideo = function() {
          document.getElementById("playIcon").className = "fas fa-pause";
      }
  }
- 
+
  window.handleVideoChange = function(videoId) {
     YT.get("player").cueVideoById(videoId);
     toggleVideoControls(true);
+    fadeControls(true);
  }
- 
+
  window.handleVideoPause = function(timestamp) {
      YT.get("player").seekTo(timestamp);
      YT.get("player").pauseVideo();
      togglePlayButton(true);
      clearInterval(window.intervalUpdateTime)
  }
- 
+
  window.handleVideoPlay = function(timestamp) {
      YT.get("player").seekTo(timestamp);
      YT.get("player").playVideo();
      togglePlayButton(false);
     window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
  }
- 
+
  window.continuoslyUpdateCurrentSongTime = function() {
     updateCurrentSongTime();
 }
@@ -214,7 +221,7 @@ window.initializeTime = function(event) {
     var state = YT.get('player').getPlayerState()
     if (window.prevState == YT.PlayerState.UNSTARTED && state == YT.PlayerState.CUED) {
         updateCurrentSongTime();
-        
+
     }
     window.prevState = state;
 }
@@ -257,7 +264,7 @@ window.addChat = function(message, time, isSelf=true, user='') {
     time = new Date(time * 1000).toLocaleTimeString().padStart(11, '0').substr(0, 5);
     var newMessage = document.createElement("div");
     newMessage.className = className;
-    newMessage.innerHTML = 
+    newMessage.innerHTML =
         `<strong>${user}</strong>
         <p class="my-0">${message}</p>
         <span>${time}</span>`;

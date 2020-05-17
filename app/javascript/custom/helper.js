@@ -9,14 +9,12 @@ window.genericHttpErrorHandler = function(error) {
     alert(`something went wrong:  ${status} : ${text}`);
 }
 
-window.sendHttpRequest = function(request, method, url, data, json) {
+window.sendHttpRequest = function(request, method, url, data) {
 	request.open(method, url, true);
 	request.setRequestHeader("X-CSRF-Token", getCsrfToken());
 	if (method == "POST") {
-	    if (json) {
-	        request.setRequestHeader("Content-Type", "application/json");
-	        data = JSON.stringify(data);
-	    }
+        request.setRequestHeader("Content-Type", "application/json");
+        data = JSON.stringify(data);
 	}
     request.send(data);
 }
@@ -36,22 +34,26 @@ window.setupHttpHandler = function(request, resolve, reject) {
 	};
 }
 
-window.makeRequest = function (method, url, data, successCallback, json, errorCallback) {
+window.makeRequest = function (method, url, data, successCallback, errorCallback) {
 	var request = new XMLHttpRequest();
 	var promise = new Promise(function (resolve, reject) {
 		setupHttpHandler(request, resolve, reject)
-		sendHttpRequest(request, method, url, data, json);
+		sendHttpRequest(request, method, url, data);
 	})
     .then(successCallback)
     .catch(errorCallback);
 };
 
-window.makePostRequest = function(url, data, successCallback=null, json=true, errorCallback=genericHttpErrorHandler) {
-    makeRequest("POST", url, data, successCallback, json, errorCallback);
+window.makePostRequest = function(url, data, successCallback=null, errorCallback=genericHttpErrorHandler) {
+    makeRequest("POST", url, data, successCallback, errorCallback);
 }
 
 window.makeGetRequest = function(url, successCallback=null, errorCallback=genericHttpErrorHandler) {
     makeRequest("GET", url, null, successCallback, false, errorCallback);
+}
+
+window.makeDeleteRequest = function(url, errorCallback=genericHttpErrorHandler) {
+	makeRequest("DELETE", url, null, null, false, errorCallback);
 }
 
 // 230.870204 -> 00:03:50
