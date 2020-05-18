@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
     def send_message(username, userroom, is_leave_message=false)
         time = Time.now.to_i
         chat = "#{username} joined the couch!"
-        puts 'REEEEEEEEEEEEEEEEEEEEEEEEE'
         puts is_leave_message
         if is_leave_message
             chat = "#{username} left the couch!"
