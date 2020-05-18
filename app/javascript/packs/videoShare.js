@@ -188,16 +188,16 @@ window.changeVideo = function() {
  }
 
  window.handleVideoPause = function(timestamp) {
-     YT.get("player").seekTo(timestamp);
-     YT.get("player").pauseVideo();
-     togglePlayButton(true);
-     clearInterval(window.intervalUpdateTime)
+    YT.get("player").seekTo(timestamp);
+    YT.get("player").pauseVideo();
+    togglePlayButton(true);
+    clearInterval(window.intervalUpdateTime)
  }
 
  window.handleVideoPlay = function(timestamp) {
-     YT.get("player").seekTo(timestamp);
-     YT.get("player").playVideo();
-     togglePlayButton(false);
+    YT.get("player").seekTo(timestamp);
+    YT.get("player").playVideo();
+    togglePlayButton(false);
     window.intervalUpdateTime = setInterval(continuoslyUpdateCurrentSongTime, 90);
  }
 

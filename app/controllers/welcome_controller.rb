@@ -26,8 +26,6 @@ class WelcomeController < ApplicationController
     end
   end
 
-
-
   def redirect
     redirect_to '/welcome/scene1'
   end

@@ -47,7 +47,6 @@ class UserController < ApplicationController
     end
 
     def chatpost
-        puts session[:user_id]
         sender = User.find(session[:user_id]).username
         user_action = params[:user_action]
         chat = params[:chat]
@@ -64,9 +63,12 @@ class UserController < ApplicationController
     end
 
     def leaveroom
-        User.find(session[:user_id]).destroy
+        user = User.find(session[:user_id])
+        room = Room.find(session[:room_id])
+        send_message user.username, room, true
+        user.destroy
         if User.where(room_id: session[:room_id]).length == 0
-            Room.find(session[:room_id]).destroy
+            room.destroy
         end
         reset_session
         redirect_to '/welcome/scene1'

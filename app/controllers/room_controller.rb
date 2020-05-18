@@ -11,6 +11,7 @@ class RoomController < ApplicationController
         session[:user_id] = @user.id
         session[:room_id] = @room.id
         session[:room_name] = @room.room_name
+        send_message @user.username, @room
         redirect_to '/welcome/from_outside_controller'
         return
     end
@@ -33,6 +34,7 @@ class RoomController < ApplicationController
         session[:user_id] = @user.id
         session[:room_id] = @room.id
         session[:room_name] = @room.room_name
+        send_message @user.username, @room
         redirect_to '/welcome/from_outside_controller'
     end
 end
