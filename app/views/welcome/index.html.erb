@@ -6,12 +6,12 @@
 <% end %>
 <!-- Hidden Variables -->
 <div
-    id="room_id" 
-    data-channel-subscribe="room" 
+    id="room_id"
+    data-channel-subscribe="room"
     data-room-id="<%= @roomID %>" hidden>
 </div>
 <div
-    id="user_id" 
+    id="user_id"
     title="<%= @userID %>" hidden>
 </div>
 <!-- Actual Body -->
@@ -33,19 +33,19 @@
                     <div id="seek" class="progress mb-2">
                         <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="transition: none"></div>
                     </div>
-                    <button id="play" class="btn overButtons" type="button" title="Play">
+                    <button id="play" class="btn btn-light overButtons" type="button" title="Play">
                         <i id="playIcon" class="fas fa-play"></i>
                     </button>
-                    <button id="volDown" class="btn overButtons" type="button" title="Volume Up">
-                        <i class="fas fa-volume-down"></i>    
+                    <button id="volDown" class="btn btn-light overButtons" type="button" title="Volume Up">
+                        <i class="fas fa-volume-down"></i>
                     </button>
-                    <button id="volUp" class="btn overButtons" type="button" title="Volume Down">
+                    <button id="volUp" class="btn btn-light overButtons" type="button" title="Volume Down">
                         <i class="fas fa-volume-up"></i>
                     </button>
                     <div id="time" class="card" style="background-color: rgb(240, 240, 240)">
                         <span><span id='curTime'>..</span> <strong>/</strong> <span id="totTime">..</span></span>
                     </div>
-                    <button id="fullscreen" class="btn overButtons" type="button" title="Full Screen">
+                    <button id="fullscreen" class="btn btn-light overButtons" type="button" title="Full Screen">
                         <i class="fas fa-compress"></i>
                     </button>
                 </div>
@@ -63,7 +63,7 @@
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-microphone"></i>
                             </button>
-                            <button id="sendChat" class="btn" type="button">Send</button>
+                            <button id="sendChat" class="btn btn-light" type="button">Send</button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="videoLink" placeholder="Youtube Link">
                 <div class="input-group-append">
-                    <button id="changeVideo" class="btn" type="button">Change Video</button>
+                    <button id="changeVideo" class="btn btn-light" type="button">Change Video</button>
                 </div>
             </div>
         </div>
