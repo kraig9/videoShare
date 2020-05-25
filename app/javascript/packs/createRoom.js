@@ -6,22 +6,28 @@ const setLoading = function(action, loading) {
         console.error('invalid action!');
         return;
     }
+    let buttonCallback = action == CREATE ? createRoom : joinRoom;
     let content;
     if (loading) {
-        content = `<div class="spinner-border"></div>`
+        content = `<div class="spinner-border"></div>`;
+        document.getElementById(`${action}RoomButton`).removeEventListener('click', buttonCallback);
     }
     else {
         let buttonText = `${action[0].toUpperCase()}${action.slice(1)} Couch`;
         content =
-            `<div class="input-group-append">
-                <button id="${action}RoomButton" class="btn btn-light" onclick="${action}Room()" type="button">${buttonText}</button>
-            </div>`
+        `<div class="input-group-append">
+        <button id="${action}RoomButton" class="btn btn-light" type="button">${buttonText}</button>
+        </div>`
     }
     let buttonHolderElement = document.getElementById(`${action}RoomButtonHolder`);
     buttonHolderElement.innerHTML = content;
+    document.getElementById(`${action}RoomClose`).disabled = loading;
+    if (!loading) {
+        document.getElementById(`${action}RoomButton`).addEventListener('click', buttonCallback);
+    }
 }
 
-window.createRoom = function() {
+export const createRoom = function() {
     var username = document.getElementById("username").value.trim();
     if (username != "") {
         setLoading(CREATE, true);
@@ -37,7 +43,7 @@ window.createRoom = function() {
     }
 }
 
-window.joinRoom = function(){
+export const joinRoom = function() {
     var roomId = document.getElementById("roomId").value.trim();
     var user = document.getElementById("user").value.trim();
     if (roomId != "" && user != "") {
@@ -56,7 +62,7 @@ window.joinRoom = function(){
 }
 
 //wait to add the event listeners until the page is loaded
-window.onload = function(){
+window.onload = function() {
     //if user presses enter act like they clicked the submit button
     document.getElementById("roomId").addEventListener('keyup', function (e) {
         if (e.keyCode == 13) {
