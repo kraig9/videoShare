@@ -3,9 +3,10 @@
     <%= javascript_pack_tag 'createRoom' %>
 <% end %>
 
+<div id="overlay"></div>
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col text-center" style="height: 75vh">
+        <div id="main-logo" class="col text-center">
             <%= image_tag("Logo2.svg", :height => "100%") %>
         </div>
     </div>
@@ -25,47 +26,7 @@
             </button>
         </div>
     </div>
-    
-    <div class="modal fade" id="createRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Couch</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
-                        <div class="input-group-append">
-                            <button id="createRoomButton" class="btn" type="button" onclick="createRoom()">Create Couch</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="joinRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Join Couch</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="roomId" placeholder="Couch ID">
-                        <input type="text" class="form-control" id="user" placeholder="Username">
-                        <div class="input-group-append">
-                            <button id="joinRoomButton" class="btn" type="button" onclick="joinRoom()">Join Couch</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <%= render 'modals' %>
+
 </div>
