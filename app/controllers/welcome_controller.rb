@@ -7,9 +7,9 @@ class WelcomeController < ApplicationController
   def from_outside_controller
     puts 'OUTSIDE CONTROLLER'
     if is_authenticated()
-      render plain: '/welcome/index'
+      render json: {location: '/welcome/index'}
     else
-      render plain: '/welcome/scene1'
+      render json: {location: '/welcome/scene1'}
     end
   end
 
