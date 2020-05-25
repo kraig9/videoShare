@@ -1,6 +1,6 @@
 window.prevState = 6;
 
-window.onYouTubeIframeAPIReady = function() {
+window.onload = function() {
     new YT.Player('player', {
         playerVars: {
             controls: 0,
