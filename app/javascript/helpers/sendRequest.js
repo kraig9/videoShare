@@ -16,7 +16,7 @@ const makeRequest = async function (method, url, requestData) {
     try {
         let response = await fetch(url, httpRequest);
         if (response.ok) {
-            responseData = await response.json();
+            let responseData = await response.json();
 			return Promise.resolve(responseData);
 		}
         return Promise.reject(response);

@@ -52,9 +52,9 @@ const handleButtonClick = async function(action) {
         usernameElement.value = '';
         let requestUrl = (action == Actions.join) ? '/room/join' : '/room';
         try {
-            let newLocation = await makePostRequest(requestUrl, requestData);
+            let response = await makePostRequest(requestUrl, requestData);
             // redirect to next page
-            window.location = newLocation;
+            window.location = response.location;
         }
         catch (error) {
             console.error(error);
