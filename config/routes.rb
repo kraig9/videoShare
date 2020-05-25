@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   root 'welcome#redirect'
   get '/video/index'
-  get '/welcome/index'
-  get '/welcome/scene1'
+  get '/room/index'
+  get '/welcome/home'
   get '/welcome/from_outside_controller'
 
   resources :user
