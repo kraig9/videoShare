@@ -1,3 +1,14 @@
+//needed for subscription
+require("channels");
+
+import {
+    makePostRequest
+} from '../../helpers/sendRequest.js'
+
+import {
+    secondsToString
+} from '../../helpers/welcome/index/time.js'
+
 window.prevState = 6;
 
 window.onload = function() {
@@ -221,7 +232,6 @@ window.initializeTime = function(event) {
     var state = YT.get('player').getPlayerState()
     if (window.prevState == YT.PlayerState.UNSTARTED && state == YT.PlayerState.CUED) {
         updateCurrentSongTime();
-
     }
     window.prevState = state;
 }
