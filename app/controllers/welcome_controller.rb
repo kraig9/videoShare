@@ -7,9 +7,9 @@ class WelcomeController < ApplicationController
   def from_outside_controller
     puts 'OUTSIDE CONTROLLER'
     if is_authenticated()
-      render plain: '/welcome/index'
+      render plain: '/room/index'
     else
-      render plain: '/welcome/scene1'
+      render plain: '/welcome/home'
     end
   end
 
@@ -20,14 +20,14 @@ class WelcomeController < ApplicationController
       @roomName = session[:room_name]
       @userID = session[:user_id]
       puts 'hello'
-      render '/welcome/index'
+      render '/room/index'
     else
-      redirect_to '/welcome/scene1'
+      redirect_to '/welcome/home'
     end
   end
 
   def redirect
-    redirect_to '/welcome/scene1'
+    redirect_to '/welcome/home'
   end
 
   def scene1

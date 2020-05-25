@@ -17,7 +17,7 @@ class RoomController < ApplicationController
     end
 
     def show
-        render "/welcome/index"
+        render "/room/index"
         #@room = room.find(params[:id])
     end
 

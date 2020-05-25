@@ -71,6 +71,6 @@ class UserController < ApplicationController
             room.destroy
         end
         reset_session
-        redirect_to '/welcome/scene1'
+        redirect_to '/welcome/home'
     end
 end
