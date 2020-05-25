@@ -1,28 +1,12 @@
 class WelcomeController < ApplicationController
-
-  def is_authenticated
-    return session[:user_id] != nil
-  end
-
   def from_outside_controller
     puts 'OUTSIDE CONTROLLER'
     if is_authenticated()
-      render json: {location: '/welcome/index'}
+      puts 'rendering room/index'
+      render json: {location: '/room/index'}
     else
-      render json: {location: '/welcome/scene1'}
-    end
-  end
-
-  def index
-    puts session[:user_id]
-    if is_authenticated()
-      @roomID = session[:room_id]
-      @roomName = session[:room_name]
-      @userID = session[:user_id]
-      puts 'hello'
-      render '/room/index'
-    else
-      redirect_to '/welcome/home'
+      puts 'rendering welcome/home'
+      render json: {location: '/welcome/home'}
     end
   end
 
