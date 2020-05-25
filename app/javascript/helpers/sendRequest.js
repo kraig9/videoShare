@@ -2,7 +2,7 @@ const getCsrfToken = function() {
 	return document.getElementsByName('csrf-token')[0].content
 }
 
-const makeRequest = function (method, url, requestData) {
+const makeRequest = async function (method, url, requestData) {
 	let httpRequest = {
 		method: method,
         headers: {
