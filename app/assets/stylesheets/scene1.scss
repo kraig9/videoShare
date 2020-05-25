@@ -25,3 +25,18 @@ P {
 	background-color: white !important;
 	color: rgb(75, 85, 198) !important;
 }
+#main-logo {
+	height: 75vh;
+}
+
+#overlay {
+	position:absolute;
+	background-color: rgb(99, 97, 97);
+	opacity: 0.5;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+	z-index: 3;
+	visibility: hidden;
+}

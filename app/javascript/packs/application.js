@@ -6,5 +6,6 @@
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
+require("styles/application.css")
 require("channels")
 require("custom/helper")
