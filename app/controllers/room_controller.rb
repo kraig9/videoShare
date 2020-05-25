@@ -2,6 +2,20 @@ class RoomController < ApplicationController
     def new
     end
 
+    def index
+        puts 'a string'
+        puts session[:user_id]
+        if is_authenticated()
+            @roomID = session[:room_id]
+            @roomName = session[:room_name]
+            @userID = session[:user_id]
+            puts 'hello'
+            render '/room/index'
+        else
+            redirect_to '/welcome/home'
+        end
+    end
+
     def create
         roomName = SecureRandom.alphanumeric(8)
         @room = Room.new('room_name' => roomName)
@@ -17,7 +31,7 @@ class RoomController < ApplicationController
     end
 
     def show
-        render "/welcome/index"
+        render "/room/index"
         #@room = room.find(params[:id])
     end
 

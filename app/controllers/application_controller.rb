@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
         puts message
         RoomChannel.broadcast_to userroom, content: message
     end
+    
+    def is_authenticated
+        return session[:user_id] != nil
+    end
 end
