@@ -3,10 +3,10 @@ class WelcomeController < ApplicationController
     puts 'OUTSIDE CONTROLLER'
     if is_authenticated()
       puts 'rendering room/index'
-      render json: {location: '/room/index'}
+      render plain: '/room/index'
     else
       puts 'rendering welcome/home'
-      render json: {location: '/welcome/home'}
+      render plain: '/welcome/home'
     end
   end
 
