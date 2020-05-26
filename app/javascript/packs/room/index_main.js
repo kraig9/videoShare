@@ -27,7 +27,7 @@ window.onload = function() {
             'onStateChange': initializeTime
         }
     });
-    // window.addEventListener('beforeunload', handleUserLeaving);
+    window.addEventListener('beforeunload', handleUserLeaving);
     initializeOverlay();
     initializeVideo();
     initializeChat();
