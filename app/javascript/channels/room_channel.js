@@ -2,7 +2,7 @@ import consumer from "./consumer";
 
 import {
     handleChannelResponse,
-} from '../helpers/room/index/channelHandlers.js'
+} from '../helpers/room/index/channel_handlers.js'
 
 import {
     getRoomId,

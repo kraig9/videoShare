@@ -10,7 +10,7 @@ import {
 
 import {
     makePostRequest
-} from '../../helpers/sendRequest.js';
+} from '../../helpers/send_request.js';
 
 import {
     initializeTime,
