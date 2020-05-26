@@ -1,4 +1,12 @@
-import consumer from "./consumer"
+import consumer from "./consumer";
+
+import {
+    handleChannelResponse,
+} from '../helpers/room/index/channelHandlers.js'
+
+import {
+    getRoomId,
+} from '../helpers/room/index/general.js'
 
 document.addEventListener('turbolinks:load', function() {
     if (document.getElementById('room_id') != null) {
@@ -15,23 +23,7 @@ document.addEventListener('turbolinks:load', function() {
         },
         received(data) {
             // Called when there's incoming data on the websocket for this channel
-            data = JSON.parse(data.content);
-            console.log(data);
-            if (data.user_action == "play") {
-                handleVideoPlay(data.timestamp);
-            }
-            else if (data.user_action == "pause") {
-                handleVideoPause(data.timestamp);
-            }
-            else if (data.user_action == "videoChange") {
-                handleVideoChange(data.video_id);
-            }
-            else if (data.user_action == "chat"){
-                handleChat(data.chat, data.time, data.id, data.name);
-            }
-            else {
-                alert("Invalid Action!");
-            }
+            handleChannelResponse(data)
         },
         broadcast: function() {
             return this.perform('broadcast');
