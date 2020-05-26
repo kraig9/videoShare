@@ -36,7 +36,7 @@ class RoomController < ApplicationController
     end
 
     def join
-        room_id = Room.where(:room_name => params[:room_name]).ids[0]
+        room_id = Room.where(:room_name => params[:room_id]).ids[0]
         if room_id.nil? then
             head 404
             return
