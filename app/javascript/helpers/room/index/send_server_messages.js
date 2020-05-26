@@ -1,6 +1,6 @@
 import {
     makePostRequest,
-} from '../../sendRequest.js';
+} from '../../send_request.js';
 
 export const sendVideoMessage = function(player, action, time=-1) {
     if (time == -1) {

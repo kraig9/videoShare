@@ -9,7 +9,7 @@ import {
 
 import {
     sendChangeVideo,
-} from './sendServerMessages.js';
+} from './send_server_messages.js';
 
 let prevState = 6;
 

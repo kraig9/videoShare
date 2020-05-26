@@ -5,7 +5,7 @@ import {
 
 import {
     sendVideoMessage
-} from './sendServerMessages.js';
+} from './send_server_messages.js';
 
 import {
     isVideoLoaded

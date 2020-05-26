@@ -4,7 +4,7 @@ import {
 
 import {
     sendChatMessage,
-} from './sendServerMessages.js';
+} from './send_server_messages.js';
 
 export const initializeChat = function() {
     document.getElementById('sendChat')

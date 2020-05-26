@@ -1,6 +1,6 @@
 import {
     makePostRequest
-} from '../../sendRequest.js';
+} from '../../send_request.js';
 
 export const Actions = {
     join: 'join',
