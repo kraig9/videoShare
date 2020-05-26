@@ -2,6 +2,11 @@ const getCsrfToken = function() {
 	return document.getElementsByName('csrf-token')[0].content
 }
 
+const isResponseJson = function(response) {
+	const contentType = response.headers.get("content-type");
+	return contentType && (contentType.indexOf("application/json") !== -1);
+}
+
 const makeRequest = async function (method, url, requestData) {
 	let httpRequest = {
 		method: method,
@@ -16,7 +21,12 @@ const makeRequest = async function (method, url, requestData) {
     try {
         let response = await fetch(url, httpRequest);
         if (response.ok) {
-            let responseData = await response.json();
+			if (isResponseJson(response)) {
+				var responseData = await response.json();
+			}
+			else {
+				var responseData = await response.text();
+			}
 			return Promise.resolve(responseData);
 		}
         return Promise.reject(response);
@@ -41,4 +51,3 @@ export const makeGetRequest = function(url) {
 export const makeDeleteRequest = function(url) {
 	return makeRequest("DELETE", url);
 }
-

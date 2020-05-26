@@ -1,6 +1,6 @@
 import {
     makePostRequest
-} from '../../sendRequest.js';
+} from '../../send_request.js';
 
 export const Actions = {
     join: 'join',
@@ -38,7 +38,7 @@ const parseUserInput = function(action, usernameElement) {
         if (action == Actions.join) {
             var roomId = document.getElementById(`${action}RoomId`).value.trim();
             // add roomId to request data if input is valid
-            requestData = (roomId != '') ? {...requestData, roomId: roomId} : null
+            requestData = (roomId != '') ? {...requestData, room_id: roomId} : null
         }
     }
     return requestData;
@@ -52,9 +52,9 @@ const handleButtonClick = async function(action) {
         usernameElement.value = '';
         let requestUrl = (action == Actions.join) ? '/room/join' : '/room';
         try {
-            let response = await makePostRequest(requestUrl, requestData);
+            let newLocation = await makePostRequest(requestUrl, requestData);
             // redirect to next page
-            window.location = response.location;
+            window.location = newLocation;
         }
         catch (error) {
             console.error(error);

@@ -1,7 +1,11 @@
 import {
     Actions,
     setLoading,
-} from '../../helpers/welcome/scene1/buttonHandlers.js';
+} from '../../helpers/welcome/home/couch_button_handlers.js';
+
+import {
+    onEnterDoButtonClick,
+} from '../../helpers/general.js';
 
 window.onload = function() {
     // Display action buttons on modals
@@ -16,13 +20,4 @@ window.onload = function() {
 
     document.getElementById("createRoomUser")
             .addEventListener('keyup', onEnterDoButtonClick('createRoomButton'));
-}
-
-const onEnterDoButtonClick = function(buttonElementId) {
-    //If user presses enter, run click handler of specified button
-    return function(e) {
-        if (e.keyCode == 13) {
-            document.getElementById(buttonElementId).click();
-        }
-    }
 }
