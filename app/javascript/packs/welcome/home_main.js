@@ -1,7 +1,7 @@
 import {
     Actions,
     setLoading,
-} from '../../helpers/welcome/home/couchButtonHandlers.js';
+} from '../../helpers/welcome/home/couch_button_handlers.js';
 
 import {
     onEnterDoButtonClick,
