@@ -1,0 +1,18 @@
+<div class="col pr-2">
+    <div class="card" style="min-height: 75vh">
+        <h2 class="card-title mb-0 text-center">Chat</h2>
+        <h6 class="card-subtitle text-center text-muted mb-1">Room ID: <%= @roomName %></h6>
+        <div class="card-body pt-0 pb-1">
+            <div id="scroll"></div>
+            <div class="input-group">
+                <input type="text" class="form-control" id="message" placeholder="Type Message">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="sendChat" class="btn btn-light" type="button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
