@@ -7,28 +7,9 @@
 
 <div id="overlay"></div>
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div id="main-logo" class="col text-center">
-            <%= image_tag("Logo2.svg", :height => "100%") %>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col">
-            <h1 class="text-center"><strong>Virtual Couch</strong></h1>
-            <p class="text-center">WATCH WITH YOUR FRIENDS</p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col text-center">
-            <button class="btn py-3 px-5 mr-1 main" data-toggle="modal" data-target="#joinRoomModal">
-                Join a Couch
-            </button>
-            <button class="btn py-3 px-5 ml-1 main" data-toggle="modal" data-target="#createRoomModal">
-                Create a Couch
-            </button>
-        </div>
-    </div>
-
-    <%= render 'modals' %>
-
+    <%= render 'logo' %>
+    <%= render 'title' %>
+    <%= render 'couch_buttons' %>
+    <%= render 'join_modal' %>
+    <%= render 'create_modal' %>
 </div>
