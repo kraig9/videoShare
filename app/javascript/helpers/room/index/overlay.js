@@ -40,7 +40,7 @@ export const initializeOverlay = function() {
             .addEventListener("click", playFullScreen);
 
     document.getElementById("controls")
-            .addEventListener("mouseover", function() {
+            .addEventListener("mouseover", () => {
                 fadeControls(false);
             });
 }
