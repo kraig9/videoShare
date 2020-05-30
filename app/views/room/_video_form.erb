@@ -2,6 +2,8 @@
     <input id="videoLink" type="text" class="form-control" placeholder="Youtube Link" data-toggle="tooltip" data-placement="bottom" title="">
     <div class="input-group-append">
         <button id="changeVideo" class="btn btn-dark" type="button">Change Video</button>
-        <button id="leaveRoom" class="btn btn-danger" type="button">Leave Couch</button>
+        <button id="leaveRoom" class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmLeaveModal">Leave Couch</button>
     </div>
 </div>
+
+<%= render 'leave_couch_modal' %>

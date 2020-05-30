@@ -15,10 +15,8 @@ export const initializeVideoForm = function() {
     document.getElementById("changeVideo")
             .addEventListener("click", changeVideo);
 
-    document.getElementById("leaveRoom")
-            .addEventListener("click", confirmLeave);
-
-    displayError("Enter YouTube Link!");
+    document.getElementById("confrimLeaveYes")
+            .addEventListener("click", sendUserLeaving);
 }
 
 export const initializeTime = function(event) {
@@ -57,9 +55,4 @@ const changeVideo = function(event) {
         return;
     }
     displayError('Invalid Youtube URL!')
-}
-
-const confirmLeave = function() {
-    // TODO Implement confirmation
-    sendUserLeaving();
 }
