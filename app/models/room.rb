@@ -7,11 +7,7 @@ class Room < ApplicationRecord
     end
 
     def is_timestamp_expired(room_id)
-        if Time.now >= Room(id).expiration_time
-            return true
-        else
-            return false
-        end
+        return Time.now >= Room(id).expiration_time ? true : false
     end
     #attr_accessor :room_name
 end
