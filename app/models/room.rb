@@ -14,5 +14,14 @@ class Room < ApplicationRecord
         #if there are still users in the room update the expiration timestamp to add another hour
         Room(id).expiration_time + 3600
     end
+
+    def start_check_expiration_thread
+        Thread.new do
+            while not is_timestamp_expired do
+                puts "Room: "
+                sleep 1.hours
+            end
+        end
+    end
     #attr_accessor :room_name
 end
