@@ -1,8 +1,4 @@
 import {
-    secondsToString,
-} from '../index/general.js';
-
-import {
     sendVideoMessage
 } from './send_server_messages.js';
 
@@ -98,7 +94,7 @@ export const updateCurrentSongTime = function(timestamp=-1) {
 
 const overlayMouseOver = function() {
     if (!isVideoLoaded()) {
-        displayError('Enter Youtube Link!')
+        displayError("Enter YouTube Link!")
     }
     else {
         fadeControls(false)
@@ -162,4 +158,10 @@ const playFullScreen = function() {
     if (requestFullScreen) {
         requestFullScreen.bind(player)();
     }
+}
+
+const secondsToString = function(seconds) {
+    var datetime = new Date(seconds * 1000);
+    // example input -> output (230.870204 -> 00:03:50)
+    return datetime.toISOString().substr(11, 8);
 }
