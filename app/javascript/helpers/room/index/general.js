@@ -1,13 +1,3 @@
-export const displayError = function (message) {
-    document.getElementById("error").innerHTML =
-        `<div class="alert alert-danger alert-dismissable m0 fade show" role="alert">`
-            + message +
-            `<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>`;
-}
-
 export const getRoomId = function() {
     return document.getElementById('room_id').getAttribute('data-room-id');
 }
