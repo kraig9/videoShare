@@ -6,8 +6,8 @@ class Room < ApplicationRecord
         Room(id).expiration_time = Room(id).created_at + (3600 * 4)
     end
 
-    def timestamp_Check(room_id)
-        if Time.now = Room(id).expiration_time
+    def is_timestamp_expired(room_id)
+        if Time.now >= Room(id).expiration_time
             return true
         else
             return false
