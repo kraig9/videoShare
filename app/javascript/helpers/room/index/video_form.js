@@ -1,39 +1,48 @@
-
-import {
-    displayError,
-} from './general.js';
-
 import {
     updateCurrentSongTime,
 } from './overlay.js';
 
 import {
     sendChangeVideo,
+    sendUserLeaving,
 } from './send_server_messages.js';
 
-let prevState = 6;
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-
-export const initializeVideo = function() {
+export const initializeVideoForm = function() {
+    // initialize tooltips
+    $(function () {
+        $("#videoLink").tooltip()
+    });
     document.getElementById("changeVideo")
             .addEventListener("click", changeVideo);
+
+    document.getElementById("confrimLeaveYes")
+            .addEventListener("click", sendUserLeaving);
 }
 
 export const initializeTime = function(event) {
     let state = YT.get('player').getPlayerState();
-    if (prevState == YT.PlayerState.UNSTARTED && state == YT.PlayerState.CUED) {
-        updateCurrentSongTime();
+    if (state == YT.PlayerState.CUED) {
+        updateCurrentSongTime(0);
     }
-    prevState = state;
 }
 
 export const isVideoLoaded = function() {
     return YT.get('player').getVideoUrl() != 'https://www.youtube.com/watch';
 }
 
-const changeVideo = function() {
+export const displayError = function (message) {
+    $('#videoLink')
+        .attr('data-original-title', message)
+        .tooltip('show');
+}
+
+export const hideError = function() {
+    $('#videoLink')
+        .attr('data-original-title', '')
+        .tooltip('hide');
+}
+
+const changeVideo = function(event) {
     const player = YT.get('player');
     let videoUrl = document.getElementById('videoLink').value;
     let splitUrl = videoUrl.split("=");

@@ -46,19 +46,28 @@ const handleChat = function(message, time, id, name) {
 const handleVideoChange = function(videoId) {
     YT.get("player").cueVideoById(videoId);
     toggleVideoControls(true);
-    fadeControls(true);
+    resetInterval();
 }
 
 const handleVideoPause = function(timestamp) {
-    YT.get("player").seekTo(timestamp);
+    YT.get("player").seekTo(timestamp, true);
     YT.get("player").pauseVideo();
     togglePlayButton(true);
-    clearInterval(intervalUpdateTime);
+    resetInterval();
+    updateCurrentSongTime(timestamp);
 }
 
 const handleVideoPlay = function(timestamp) {
     YT.get("player").seekTo(timestamp);
     YT.get("player").playVideo();
     togglePlayButton(false);
-    intervalUpdateTime = setInterval(updateCurrentSongTime, 90);
+    if (intervalUpdateTime == null) {
+        intervalUpdateTime = setInterval(updateCurrentSongTime, 90);
+    }
+}
+
+const resetInterval = function() {
+    clearInterval(intervalUpdateTime);
+    intervalUpdateTime = null;
+
 }

@@ -1,15 +1,15 @@
 import {
-    displayError,
-    secondsToString,
-} from '../index/general.js'
-
-import {
     sendVideoMessage
 } from './send_server_messages.js';
 
 import {
+    displayError,
+    hideError,
+} from '../index/video_form.js';
+
+import {
     isVideoLoaded
-} from './video.js';
+} from './video_form.js';
 
 export const initializeOverlay = function() {
     // hide video controls
@@ -74,21 +74,27 @@ export const toggleVideoControls = function(show) {
     }
 }
 
-export const updateCurrentSongTime = function() {
+export const updateCurrentSongTime = function(timestamp=-1) {
     let player = YT.get('player');
-    let currentTime = secondsToString(player.getCurrentTime());
-    let duration = secondsToString(player.getDuration());
-    document.getElementById("curTime").innerText = currentTime;
-    document.getElementById('totTime').innerText = duration;
+    let currentTime = timestamp == -1 ? player.getCurrentTime() : timestamp;
+    let currentTimeStr = secondsToString(currentTime);
+    let duration = player.getDuration();
+    let durationStr = secondsToString(duration);
+    document.getElementById("curTime").innerText = currentTimeStr;
+    document.getElementById('totTime').innerText = durationStr;
     let progressBar = document.getElementById("progressBar");
-    let progress = (player.getCurrentTime() / player.getDuration()) * 100
+    if (duration == 0) {
+        // avoid divide by 0
+        duration = 1;
+    }
+    let progress = (currentTime / duration) * 100;
     progressBar.setAttribute("aria-valuenow", progress);
     progressBar.style.width = `${progress}%`;
 }
 
 const overlayMouseOver = function() {
     if (!isVideoLoaded()) {
-        displayError(`<i class="fas fa-arrow-left"></i> Enter Youtube Link!`)
+        displayError("Enter YouTube Link!");
     }
     else {
         fadeControls(false)
@@ -97,7 +103,7 @@ const overlayMouseOver = function() {
 
 const overlayMouseOut = function() {
     if (!isVideoLoaded()) {
-        document.getElementById('error').innerHTML = '';
+        hideError();
     }
     else {
         fadeControls(true);
@@ -152,4 +158,10 @@ const playFullScreen = function() {
     if (requestFullScreen) {
         requestFullScreen.bind(player)();
     }
+}
+
+const secondsToString = function(seconds) {
+    var datetime = new Date(seconds * 1000);
+    // example input -> output (230.870204 -> 00:03:50)
+    return datetime.toISOString().substr(11, 8);
 }

@@ -9,13 +9,9 @@ import {
 } from '../../helpers/room/index/overlay.js';
 
 import {
-    sendUserLeaving,
-} from '../../helpers/room/index/send_server_messages.js';
-
-import {
     initializeTime,
-    initializeVideo,
-} from '../../helpers/room/index/video.js';
+    initializeVideoForm,
+} from '../../helpers/room/index/video_form.js';
 
 window.onload = function() {
     new YT.Player('player', {
@@ -24,11 +20,15 @@ window.onload = function() {
             rel: 0,
         },
         events: {
-            'onStateChange': initializeTime
+            'onReady': onYouTubePlayerReady,
+            'onStateChange': initializeTime,
         }
     });
-    // window.addEventListener('beforeunload', sendUserLeaving);
+}
+
+// wait until YouTube Player is ready before initializing elements
+const onYouTubePlayerReady = function(event) {
     initializeOverlay();
-    initializeVideo();
+    initializeVideoForm();
     initializeChat();
 }
