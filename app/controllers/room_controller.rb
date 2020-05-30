@@ -3,7 +3,6 @@ class RoomController < ApplicationController
     end
 
     def index
-        puts 'a string'
         puts session[:user_id]
         if is_authenticated()
             @roomID = session[:room_id]
