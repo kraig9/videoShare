@@ -29,9 +29,14 @@ export const sendChatMessage = function(message) {
     makePostRequestAndErrorHandle('/user/chatpost', requestData);
 }
 
-export const sendUserLeaving = function(e) {
-    e.returnValue = 'Leaving Room!';
-    makePostRequest('/user/leaveroom');
+export const sendUserLeaving = async function(e) {
+    try {
+        let newLocation = await makePostRequest('/user/leaveroom')
+        window.location = newLocation;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
 const makePostRequestAndErrorHandle = async function(url, requestData) {

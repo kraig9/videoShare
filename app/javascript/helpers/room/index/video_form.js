@@ -61,5 +61,5 @@ const changeVideo = function(event) {
 
 const confirmLeave = function() {
     // TODO Implement confirmation
-    // sendUserLeaving();
+    sendUserLeaving();
 }
