@@ -12,6 +12,9 @@ import {
 } from './send_server_messages.js';
 
 let prevState = 6;
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
 
 export const initializeVideo = function() {
     document.getElementById("changeVideo")
