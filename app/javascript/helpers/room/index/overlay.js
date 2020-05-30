@@ -94,7 +94,7 @@ export const updateCurrentSongTime = function(timestamp=-1) {
 
 const overlayMouseOver = function() {
     if (!isVideoLoaded()) {
-        displayError("Enter YouTube Link!")
+        displayError("Enter YouTube Link!");
     }
     else {
         fadeControls(false)
