@@ -10,11 +10,23 @@
 <%= render 'hidden_variables' %>
 
 <div class="container-fluid">
+    <div class="row justify-content-center">
+        <%= render 'logo' %>
+    </div>
     <div class="row row-eq-height">
-        <%= render 'video' %>
-        <%= render 'chat' %>
+        <div class="col-8 pr-0">
+            <%= render 'video' %>
+        </div>
+        <div class="col pr-2">
+            <%= render 'chat' %>
+        </div>
     </div>
     <div class="row row-eq-height pt-1 pb-0">
-        <%= render 'change_video' %>
+        <div class="col-4 pr-0">
+            <%= render 'change_video' %>
+        </div>
+        <div class="col-2 pl-0">
+            <div id="error"></div>
+        </div>
     </div>
 </div>
