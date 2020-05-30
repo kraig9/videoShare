@@ -17,6 +17,8 @@ export const initializeVideoForm = function() {
 
     document.getElementById("leaveRoom")
             .addEventListener("click", confirmLeave);
+
+    displayError("Enter YouTube Link!");
 }
 
 export const initializeTime = function(event) {
@@ -42,7 +44,7 @@ export const hideError = function() {
         .tooltip('hide');
 }
 
-const changeVideo = function() {
+const changeVideo = function(event) {
     const player = YT.get('player');
     let videoUrl = document.getElementById('videoLink').value;
     let splitUrl = videoUrl.split("=");
