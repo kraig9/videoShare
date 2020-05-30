@@ -125,9 +125,14 @@ body {
 }
 
 .tooltip > .tooltip-inner {
-    background-color: #ff003a;
+    background-color: #ce4948;
 }
 
 .bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
-    border-bottom-color: #ff003a;
+    border-bottom-color: #ce4948;
+}
+
+#confrimLeaveYes {
+    color: white;
+    background-color: #ce4948;
 }
