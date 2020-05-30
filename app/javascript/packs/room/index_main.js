@@ -9,8 +9,8 @@ import {
 } from '../../helpers/room/index/overlay.js';
 
 import {
-    makePostRequest
-} from '../../helpers/send_request.js';
+    sendUserLeaving,
+} from '../../helpers/room/index/send_server_messages.js';
 
 import {
     initializeTime,
@@ -27,13 +27,8 @@ window.onload = function() {
             'onStateChange': initializeTime
         }
     });
-    window.addEventListener('beforeunload', handleUserLeaving);
+    // window.addEventListener('beforeunload', sendUserLeaving);
     initializeOverlay();
     initializeVideo();
     initializeChat();
-}
-
-const handleUserLeaving = function(e) {
-    e.returnValue = 'Leaving Room!';
-    makePostRequest('/user/leaveroom');
 }
