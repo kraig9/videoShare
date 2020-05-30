@@ -4,12 +4,15 @@
 body {
     background: linear-gradient(0deg, rgba(25,0,190,1.00), rgba(110,90,207,1.00), rgba(175,167,167,1.00));
 }
+
 #holder{
     position: relative;
 }
+
 #player{
     z-index: 1;
 }
+
 #overlay{
     position:absolute;
     top: 0%;
@@ -18,21 +21,29 @@ body {
     height: 100%;
     z-index: 2;
 }
+
+#controls {
+    visibility: hidden;
+}
+
 .overButtons {
     position: absolute;
     top: 90%;
     z-index: 3;
 }
+
 #play {
     left: 5%;
 }
+
 #volDown {
     left: 10%;
 }
+
 #volUp {
     left: 15%;
-
 }
+
 #time {
     position: absolute;
     top: 90%;
@@ -40,9 +51,11 @@ body {
     z-index: 3;
     cursor: default;
 }
+
 #fullscreen {
     right: 5%;
 }
+
 #seek {
     position: absolute;
     z-index: 3;
@@ -51,19 +64,22 @@ body {
     width: 90%;
     cursor: pointer;
 }
+
 #scroll {
     height: 90%;
     background-color: #deeafa;
     overflow-y: auto;
 }
+
 .card-body {
     max-height: 90%;
 }
+
 .alert {
     padding-top: 0.375rem !important;
     padding-bottom: 0.375rem !important;
 }
-/* Chat containers */
+
 .msg {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
@@ -77,7 +93,6 @@ body {
   text-align: right;
 }
 
-/* Darker chat container */
 .other {
   border-color: #ccc;
   background-color: #ddd;
@@ -85,14 +100,12 @@ body {
   text-align: left;
 }
 
-/* Clear floats */
 .msg::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* Style time text */
 .msg > span {
     float: right;
     color: #aaa;
@@ -103,6 +116,18 @@ body {
     color: #999;
 }
 
-#error {
-    width: 15rem;
+.form-control {
+    border-color: black;
+}
+
+.appbar {
+    background-color: white;
+}
+
+.tooltip > .tooltip-inner {
+    background-color: #ff003a;
+}
+
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
+    border-bottom-color: #ff003a;
 }
