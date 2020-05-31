@@ -22,14 +22,22 @@ class Room < ApplicationRecord
     def start_check_expiration_thread
         Thread.new do
             puts "before loop"
+            while true do
+                if is_timestamp_expired do
+                    if users_connected
+                        update_expiration_timestamp
+                    else
+                    end
+                else
+                    sleep 10.seconds
+                end
+            end
             while not is_timestamp_expired do
                 #puts "Room: " + self + " has not expired yet."
                 puts "in loop"
-                sleep 1.seconds
             end
             puts "out of loop"
             #puts "Room: " + self + " has expired!"
         end
     end
-    #attr_accessor :room_name
 end
