@@ -1,26 +1,34 @@
 class Room < ApplicationRecord
     has_many :users
 
-    def self.set_expiration_timestamp(room_id)
+    def set_expiration_timestamp
         #set expiration time to 4 hours after the room creation time
-        Room(id).expiration_time = Room(id).created_at + (3600 * 4)
+        self.expiration_time = self.created_at + (3600 * 4)
     end
 
-    def self.is_timestamp_expired(room_id)
-        return Time.now >= Room(id).expiration_time ? true : false
+    def is_timestamp_expired
+        puts "in the timestamp expired method"
+        puts self
+        puts Time.now.utc
+        puts self.expiration_time.utc
+        return Time.now.utc >= self.expiration_time ? true : false
     end
 
-    def self.update_expiration_timestamp(room_id)
+    def update_expiration_timestamp
         #if there are still users in the room update the expiration timestamp to add another hour
-        Room(id).expiration_time + 3600
+        self.expiration_time + 3600
     end
 
-    def self.start_check_expiration_thread
+    def start_check_expiration_thread
         Thread.new do
+            puts "before loop"
             while not is_timestamp_expired do
-                puts "Room: "
-                sleep 1.hours
+                #puts "Room: " + self + " has not expired yet."
+                puts "in loop"
+                sleep 1.seconds
             end
+            puts "out of loop"
+            #puts "Room: " + self + " has expired!"
         end
     end
     #attr_accessor :room_name
