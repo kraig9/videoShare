@@ -19,6 +19,7 @@ class Room < ApplicationRecord
 
     def start_check_expiration_thread
         #thread that checks if the current time is after the expiration time
+        set_expiration_timestamp
         Thread.new do
             loop do
                 user_still_in = false
