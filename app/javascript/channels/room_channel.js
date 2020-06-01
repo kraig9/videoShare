@@ -5,7 +5,8 @@ import {
 } from '../helpers/room/index/channel_handlers.js'
 
 import {
-    getRoomId, getUserId,
+    getRoomId,
+    getUserId,
 } from '../helpers/room/index/general.js'
 
 document.addEventListener('turbolinks:load', function() {
@@ -17,7 +18,6 @@ document.addEventListener('turbolinks:load', function() {
         }, {
         connected() {
             // Called when the subscription is ready for use on the server
-            console.log("Connected!")
         },
         disconnected() {
             // Called when the subscription has been terminated by the server

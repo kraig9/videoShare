@@ -23,12 +23,9 @@ class Room < ApplicationRecord
             loop do
                 user_still_in = false
                 while not is_timestamp_expired do
-                    sleep 1.seconds
-                    puts "sleepin"
+                    sleep 1.hours
                 end
-                puts self.id.to_s
                 User.where(room_id: self.id).each do |user|
-                    puts user
                     if user.connected == false
                         user.delete
                         user.save
@@ -37,7 +34,6 @@ class Room < ApplicationRecord
                     end
                 end
                 if user_still_in
-                    puts "inside user still in"
                     update_expiration_timestamp
                 else
                     self.delete
