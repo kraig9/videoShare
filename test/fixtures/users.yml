@@ -11,4 +11,5 @@ fix_<%= i %>:
   id: <%= i %>
   username: guy_<%= i %>
   room_id: <%= (i % 5) + 1%>
+  connected: false
 <% end %>

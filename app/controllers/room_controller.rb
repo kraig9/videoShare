@@ -3,7 +3,6 @@ class RoomController < ApplicationController
     end
 
     def index
-        puts 'a string'
         puts session[:user_id]
         if is_authenticated()
             @roomID = session[:room_id]
@@ -17,10 +16,11 @@ class RoomController < ApplicationController
     end
 
     def create
-        #roomName = SecureRandom.alphanumeric(4)
         roomName = helpers.generate_random_string
         @room = Room.new('room_name' => roomName)
+        @room.set_expiration_timestamp
         @room.save
+        @room.start_check_expiration_thread
         @user = User.new('room_id' => @room.id, 'username' => params[:username])
         @user.save
         session[:user_id] = @user.id

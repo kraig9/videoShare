@@ -6,17 +6,18 @@ import {
 
 import {
     getRoomId,
+    getUserId,
 } from '../helpers/room/index/general.js'
 
 document.addEventListener('turbolinks:load', function() {
     if (document.getElementById('room_id') != null) {
         consumer.subscriptions.create({
             channel: "RoomChannel",
-            room_id: getRoomId()
+            room_id: getRoomId(),
+            user_id: getUserId()
         }, {
         connected() {
             // Called when the subscription is ready for use on the server
-            console.log("Connected!")
         },
         disconnected() {
             // Called when the subscription has been terminated by the server

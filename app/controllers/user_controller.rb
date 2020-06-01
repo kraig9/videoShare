@@ -71,6 +71,6 @@ class UserController < ApplicationController
             room.destroy
         end
         reset_session
-        redirect_to '/welcome/home'
+        render :plain => '/welcome/home'
     end
 end

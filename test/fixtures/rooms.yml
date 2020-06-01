@@ -12,5 +12,6 @@
 <% 1.upto(5) do |i| %>
 fix_<%= i %>:
   id: <%= i %>
-  code: <%= i %>
+  room_name: <%= i %>
+  expiration_time: <%= Time.now.utc %>
 <% end %>

@@ -15,8 +15,8 @@ export const initializeVideoForm = function() {
     document.getElementById("changeVideo")
             .addEventListener("click", changeVideo);
 
-    document.getElementById("leaveRoom")
-            .addEventListener("click", confirmLeave);
+    document.getElementById("confrimLeaveYes")
+            .addEventListener("click", sendUserLeaving);
 }
 
 export const initializeTime = function(event) {
@@ -42,7 +42,7 @@ export const hideError = function() {
         .tooltip('hide');
 }
 
-const changeVideo = function() {
+const changeVideo = function(event) {
     const player = YT.get('player');
     let videoUrl = document.getElementById('videoLink').value;
     let splitUrl = videoUrl.split("=");
@@ -55,9 +55,4 @@ const changeVideo = function() {
         return;
     }
     displayError('Invalid Youtube URL!')
-}
-
-const confirmLeave = function() {
-    // TODO Implement confirmation
-    // sendUserLeaving();
 }

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_015737) do
     t.string "room_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "expiration_time"
   end
 
   create_table "users", force: :cascade do |t|
@@ -23,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_015737) do
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "connected"
     t.index ["room_id"], name: "index_users_on_room_id"
   end
 
