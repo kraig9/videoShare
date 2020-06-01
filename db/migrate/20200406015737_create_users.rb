@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
         t.belongs_to :room
         t.string :username
         t.timestamps
+        t.boolean :connected
     end
   end
 end
