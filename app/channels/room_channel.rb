@@ -11,9 +11,13 @@ class RoomChannel < ApplicationCable::Channel
 
     def unsubscribed
         # Any cleanup needed when channel is unsubscribed
-        user_sub = User.find(params[:user_id])
-        user_sub.connected = false
-        user_sub.save
+        user_sub = User.where(id: params[:user_id])
+        if user_sub.length == 1
+            # if user closes broswer, they will not
+            # be automatically deleted from the db
+            user_sub.connected = false
+            user_sub.save
+        end
     end
 
     def room
