@@ -18,7 +18,6 @@ class RoomController < ApplicationController
     def create
         roomName = helpers.generate_random_string
         @room = Room.new('room_name' => roomName)
-        @room.set_expiration_timestamp
         @room.save
         @room.start_check_expiration_thread
         @user = User.new('room_id' => @room.id, 'username' => params[:username])
