@@ -3,41 +3,49 @@ class Room < ApplicationRecord
 
     def set_expiration_timestamp
         #set expiration time to 4 hours after the room creation time
-        self.expiration_time = self.created_at + (3600 * 4)
+        self.expiration_time = self.created_at + 4.hours
+        self.save
     end
 
     def is_timestamp_expired
-        puts "in the timestamp expired method"
-        puts self
-        puts Time.now.utc
-        puts self.expiration_time.utc
         return Time.now.utc >= self.expiration_time ? true : false
     end
 
     def update_expiration_timestamp
         #if there are still users in the room update the expiration timestamp to add another hour
-        self.expiration_time + 3600
+        self.expiration_time += 1.hours
+        self.save
     end
 
     def start_check_expiration_thread
+        #thread that checks if the current time is after the expiration time
         Thread.new do
-            puts "before loop"
-            while true do
-                if is_timestamp_expired do
-                    if users_connected
-                        update_expiration_timestamp
-                    else
-                    end
-                else
-                    sleep 10.seconds
+            loop do
+                user_still_in = false
+                while not is_timestamp_expired do
+                    sleep 1.seconds
+                    puts "sleepin"
                 end
+                puts self.id.to_s
+                User.where(room_id: self.id).each do |user|
+                    puts user
+                    if user.connected == false
+                        user.delete
+                        user.save
+                    else
+                        user_still_in = true
+                    end
+                end
+                if user_still_in
+                    puts "inside user still in"
+                    update_expiration_timestamp
+                else
+                    self.delete
+                    self.save
+                end
+                break if not user_still_in
             end
-            while not is_timestamp_expired do
-                #puts "Room: " + self + " has not expired yet."
-                puts "in loop"
-            end
-            puts "out of loop"
-            #puts "Room: " + self + " has expired!"
         end
     end
+    #attr_accessor :room_name
 end

@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
     end
     
     def is_authenticated
-        return session[:user_id] != nil
+        user_check = User.where(id: session[:user_id])
+        if user_check.length == 0
+            reset_session
+            return false
+        end
+        return true
+        #return session[:user_id] != nil
     end
 end
