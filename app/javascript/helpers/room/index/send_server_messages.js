@@ -31,7 +31,7 @@ export const sendChatMessage = function(message) {
 
 export const sendUserLeaving = async function(e) {
     try {
-        let newLocation = await makePostRequest('/user/leaveroom')
+        let newLocation = await makePostRequest('/user/leaveroom');
         window.location = newLocation;
     }
     catch (error) {
