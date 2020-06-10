@@ -36,12 +36,16 @@ body {
     left: 5%;
 }
 
-#volDown {
+#volume {
     left: 10%;
 }
 
-#volUp {
+#volumeRange {
     left: 15%;
+    top: 92%;
+    visibility: hidden;
+    vertical-align: middle;
+    width: 15%;
 }
 
 #time {
