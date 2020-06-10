@@ -27,11 +27,11 @@ export const initializeOverlay = function() {
     document.getElementById("play")
             .addEventListener("click", controlVideo);
 
-    document.getElementById("volUp")
-            .addEventListener("click", increaseVolume);
+    document.getElementById("volume")
+            .addEventListener("click", toggleVolumeRange);
 
-    document.getElementById("volDown")
-            .addEventListener("click", decreaseVolume);
+    document.getElementById("volumeRange")
+            .addEventListener("input", changeVolume);
 
     document.getElementById("seek")
             .addEventListener("click", seekVideo);
@@ -60,6 +60,7 @@ export const toggleVideoControls = function(show) {
     }
     else {
         show = 'hidden';
+        toggleVolumeRange(null, true);
     }
     document.getElementById('controls').style.visibility = show;
  }
@@ -70,7 +71,7 @@ export const toggleVideoControls = function(show) {
     }
     else {
         clearTimeout(window.timeoutControls);
-        toggleVideoControls(true)
+        toggleVideoControls(true);
     }
 }
 
@@ -80,7 +81,7 @@ export const updateCurrentSongTime = function(timestamp=-1) {
     let currentTimeStr = secondsToString(currentTime);
     let duration = player.getDuration();
     let durationStr = secondsToString(duration);
-    document.getElementById("curTime").innerText = currentTimeStr;
+    document.getElementById('curTime').innerText = currentTimeStr;
     document.getElementById('totTime').innerText = durationStr;
     let progressBar = document.getElementById("progressBar");
     if (duration == 0) {
@@ -92,12 +93,24 @@ export const updateCurrentSongTime = function(timestamp=-1) {
     progressBar.style.width = `${progress}%`;
 }
 
+const toggleVolumeRange = function(event, forceHide=false) {
+    if (forceHide == true) {
+        var newVisibility = 'hidden';
+    }
+    else {
+        const volumeRange = document.getElementById("volumeRange");
+        const previousVisibility = volumeRange.style.visibility;
+        var newVisibility = previousVisibility == 'visible' ? 'hidden' : 'visible';
+    }
+    volumeRange.style.visibility = newVisibility;
+}
+
 const overlayMouseOver = function() {
     if (!isVideoLoaded()) {
         displayError("Enter YouTube Link!");
     }
     else {
-        fadeControls(false)
+        fadeControls(false);
     }
 }
 
@@ -110,20 +123,10 @@ const overlayMouseOut = function() {
     }
 }
 
-const decreaseVolume = function() {
+const changeVolume = function(event) {
     let player = YT.get('player');
-    let currentVolume = player.getVolume();
-    if (currentVolume != 0) {
-        player.setVolume(currentVolume - 10);
-    }
-}
-
-const increaseVolume = function() {
-    let player = YT.get('player');
-    let currentVolume = player.getVolume();
-    if (currentVolume != 100) {
-        player.setVolume(currentVolume + 10);
-    }
+    let currentVolume = event.target.value;
+    player.setVolume(currentVolume);
 }
 
 const controlVideo = function(event){
@@ -132,7 +135,10 @@ const controlVideo = function(event){
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             sendVideoMessage(player, 'pause');
         }
-        else if (player.getPlayerState() == YT.PlayerState.PAUSED || player.getPlayerState() == YT.PlayerState.CUED) {
+        else if (
+            player.getPlayerState() == YT.PlayerState.PAUSED ||
+            player.getPlayerState() == YT.PlayerState.CUED
+        ) {
             sendVideoMessage(player, 'play');
         }
     }
