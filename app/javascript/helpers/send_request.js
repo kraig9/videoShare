@@ -1,5 +1,5 @@
 const getCsrfToken = function() {
-	return document.getElementsByName('csrf-token')[0].content
+	return document.getElementsByName('csrf-token')[0].content;
 }
 
 const isResponseJson = function(response) {
