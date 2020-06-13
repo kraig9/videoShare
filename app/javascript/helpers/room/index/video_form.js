@@ -30,7 +30,7 @@ export const isVideoLoaded = function() {
     return YT.get('player').getVideoUrl() != 'https://www.youtube.com/watch';
 }
 
-export const displayError = function (message) {
+export const displayVideoError = function (message) {
     $('#videoLink')
         .attr('data-original-title', message)
         .tooltip('show');
