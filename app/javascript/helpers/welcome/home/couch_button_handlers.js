@@ -38,8 +38,18 @@ const parseUserInput = function(action, usernameElement) {
         if (action == Actions.join) {
             var roomId = document.getElementById(`${action}RoomId`).value.trim();
             // add roomId to request data if input is valid
-            requestData = (roomId != '') ? {...requestData, room_id: roomId} : null
+            if (roomId == '') {
+                requestData = null;
+                displayActionError(action, 'Please enter Couch ID!');
+            }
+            else {
+                requestData = {...requestData, room_id: roomId};
+            }
+
         }
+    }
+    else {
+        displayActionError(action, 'Please enter username!');
     }
     return requestData;
 }
@@ -58,7 +68,24 @@ const handleButtonClick = async function(action) {
         }
         catch (error) {
             console.error(error);
+            if (error.status == 404) {
+                displayActionError(action, 'Couch ID does not exist!');
+            }
+            else {
+                displayActionError(action, 'Unknown error occured!');
+            }
             setLoading(action, false);
         }
     }
+}
+
+const displayActionError = function(action, message) {
+    document.getElementById(`${action}RoomError`).innerHTML =
+        `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+           ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+
 }
