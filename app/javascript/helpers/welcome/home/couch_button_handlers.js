@@ -87,5 +87,4 @@ const displayActionError = function(action, message) {
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>`;
-
 }
