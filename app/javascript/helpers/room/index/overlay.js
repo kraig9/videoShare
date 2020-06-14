@@ -3,7 +3,7 @@ import {
 } from './send_server_messages.js';
 
 import {
-    displayError,
+    displayVideoError,
     hideError,
 } from '../index/video_form.js';
 
@@ -107,7 +107,7 @@ const toggleVolumeRange = function(event, forceHide=false) {
 
 const overlayMouseOver = function() {
     if (!isVideoLoaded()) {
-        displayError("Enter YouTube Link!");
+        displayVideoError("Enter YouTube Link!");
     }
     else {
         fadeControls(false);
