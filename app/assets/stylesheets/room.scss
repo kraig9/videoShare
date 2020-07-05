@@ -24,48 +24,34 @@ body {
 
 #controls {
     visibility: hidden;
+    padding-top: 48%;
+}
+
+.controlRight {
+    border-color: black;
+}
+.controlRight:hover {
+    border-color: black;
 }
 
 .overButtons {
-    position: absolute;
-    top: 90%;
     z-index: 3;
-}
-
-#play {
-    left: 5%;
-}
-
-#volume {
-    left: 10%;
 }
 
 #volumeRange {
-    left: 15%;
-    top: 92%;
-    visibility: hidden;
-    vertical-align: middle;
-    width: 15%;
+    width: 50%;
 }
 
 #time {
-    position: absolute;
-    top: 90%;
-    left: 45%;
-    z-index: 3;
+    text-align: center;
     cursor: default;
 }
 
 #fullscreen {
-    right: 5%;
+    float: right;
 }
 
 #seek {
-    position: absolute;
-    z-index: 3;
-    left: 5%;
-    top: 85%;
-    width: 90%;
     cursor: pointer;
 }
 
