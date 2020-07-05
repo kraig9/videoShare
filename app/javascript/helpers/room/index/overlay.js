@@ -130,16 +130,18 @@ const changeVolume = function(event) {
 }
 
 const controlVideo = function(event){
-    let player = YT.get('player');
-    if (isVideoLoaded()) {
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-            sendVideoMessage(player, 'pause');
-        }
-        else if (
-            player.getPlayerState() == YT.PlayerState.PAUSED ||
-            player.getPlayerState() == YT.PlayerState.CUED
-        ) {
-            sendVideoMessage(player, 'play');
+    if (event.target.id == 'play' || event.target.id == 'controls') {
+        let player = YT.get('player');
+        if (isVideoLoaded()) {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                sendVideoMessage(player, 'pause');
+            }
+            else if (
+                player.getPlayerState() == YT.PlayerState.PAUSED ||
+                player.getPlayerState() == YT.PlayerState.CUED
+            ) {
+                sendVideoMessage(player, 'play');
+            }
         }
     }
 }
