@@ -13,7 +13,7 @@ export const sendVideoMessage = function(player, action, time=-1) {
     makePostRequestAndErrorHandle('/user/timestamp', requestData);
 }
 
-export const sendChangeVideo = function(player, videoId) {
+export const sendChangeVideo = function(videoId) {
     let requestData = {
         "user_action": "videoChange",
         "video_id": videoId,
