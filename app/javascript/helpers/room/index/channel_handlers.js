@@ -44,22 +44,25 @@ const handleChat = function(message, time, id, name) {
 }
 
 const handleVideoChange = function(videoId) {
-    YT.get("player").cueVideoById(videoId);
+    const player = YT.get("player");
+    player.cueVideoById(videoId);
     toggleVideoControls(true);
     resetInterval();
 }
 
 const handleVideoPause = function(timestamp) {
-    YT.get("player").seekTo(timestamp, true);
-    YT.get("player").pauseVideo();
+    const player = YT.get("player");
+    player.seekTo(timestamp, true);
+    player.pauseVideo();
     togglePlayButton(true);
     resetInterval();
     updateCurrentSongTime(timestamp);
 }
 
 const handleVideoPlay = function(timestamp) {
-    YT.get("player").seekTo(timestamp);
-    YT.get("player").playVideo();
+    const player = YT.get("player");
+    player.seekTo(timestamp);
+    player.playVideo();
     togglePlayButton(false);
     if (intervalUpdateTime == null) {
         intervalUpdateTime = setInterval(updateCurrentSongTime, 90);

@@ -58,9 +58,12 @@ const changeVideo = function(event) {
     // the expression if the first is false
     if (splitUrl.length > 1 && splitUrl[1].length >= 11) {
         let videoId = splitUrl[1].substr(0, 11);
-        sendChangeVideo(player, videoId);
+        sendChangeVideo(videoId);
         document.getElementById('videoLink').value = '';
         return;
     }
-    displayError('Invalid Youtube URL!')
+    else {
+        displayError('Invalid Youtube URL!');
+        setTimeout(hideError, 2000);
+    }
 }
