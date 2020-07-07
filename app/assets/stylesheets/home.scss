@@ -44,3 +44,11 @@ P {
 .spinner-border {
     margin-left: 1em;
 }
+
+#joinRoomId {
+    text-transform: uppercase;
+}
+
+::-webkit-input-placeholder {
+	text-transform: none;
+}
