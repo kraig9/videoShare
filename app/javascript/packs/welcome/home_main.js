@@ -1,6 +1,7 @@
 import {
     Actions,
     setLoading,
+    filterInput,
 } from '../../helpers/welcome/home/couch_button_handlers.js';
 
 import {
@@ -15,9 +16,13 @@ window.onload = function() {
     document.getElementById('joinRoomId')
             .addEventListener('keyup', onEnterDoButtonClick('joinRoomButton'));
 
-    document.getElementById("joinRoomUser")
+    document.getElementById('joinRoomUser')
             .addEventListener('keyup', onEnterDoButtonClick('joinRoomButton'));
 
-    document.getElementById("createRoomUser")
+    document.getElementById('createRoomUser')
             .addEventListener('keyup', onEnterDoButtonClick('createRoomButton'));
+
+    document.getElementById('joinRoomId')
+            .addEventListener('keydown', filterInput);
+
 }

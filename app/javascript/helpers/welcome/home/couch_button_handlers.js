@@ -20,6 +20,20 @@ export const setLoading = function(action, loading) {
     }
 }
 
+export const filterInput = function(event) {
+    let newChange = event.key.toUpperCase();
+    let changeIsAlpha = newChange.match(/^[A-Z]$/) != null;
+    if (!changeIsAlpha) {
+        let changeIsAcceptable = newChange.match(/BACKSPACE|DELETE|ARROW/) != null;
+        if (!changeIsAcceptable) {
+            event.preventDefault();
+        }
+    }
+    else if (event.target.value.length == 4) {
+        event.preventDefault();
+    }
+}
+
 const getButtonHolderContent = function(action, loading) {
     if (loading) {
         return `<div class="spinner-border"></div>`;
