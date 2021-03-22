@@ -28,7 +28,6 @@ COPY Gemfile.lock .
 RUN bundle config build.nokogiri --use-system-libraries
 RUN apt-get update && apt-get install -y gcc ruby-dev pkg-config make libxml2-dev libxslt1-dev zlib1g-dev g++ libsqlite3-dev
 RUN bundle install
-RUN yarn install --check-files
 
 ARG INSTALL_PATH=/opt/videoShare
 ENV INSTALL_PATH $INSTALL_PATH
