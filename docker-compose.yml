@@ -1,0 +1,20 @@
+version: "3.0"
+services:
+  webpacker:
+    image: ${DOCKER_IMAGE_NAME-videoshare}
+    command: ["./scripts/start_webpack_dev.sh"]
+    volumes:
+      - .:/opt/videoshare:cached
+    ports:
+      - 3035:3035
+  web:
+    image: ${DOCKER_IMAGE_NAME-videoshare}
+    build:
+      context: .
+    links:
+      - webpacker
+    ports:
+      - 3000:3000
+    command: ["./scripts/start_rails.sh"]
+    volumes:
+      - .:/opt/videoshare:cached
