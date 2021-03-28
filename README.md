@@ -8,5 +8,6 @@
   * `DB_HOST=db`
   * `RAILS_ENV=development`
   * `SECRET_KEY_BASE=<your_password>`
+- `docker build . --build-arg precompileassets=not`
 - `docker-compose up -d --build` (It will take a couple minutes to finish spinning up)
 - Navigate to `http://localhost:3000`
