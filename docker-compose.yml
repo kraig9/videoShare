@@ -1,20 +1,31 @@
 version: "3.0"
 services:
+  db:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+
   webpacker:
     image: ${DOCKER_IMAGE_NAME-videoshare}
     command: ["./scripts/start_webpack_dev.sh"]
     volumes:
-      - .:/opt/videoshare:cached
+      - .:/opt/dockerrailsdemo:cached
     ports:
       - 3035:3035
+
   web:
     image: ${DOCKER_IMAGE_NAME-videoshare}
     build:
       context: .
+      args:
+        precompileassets: "not"
     links:
+      - db
       - webpacker
     ports:
       - 3000:3000
-    command: ["./scripts/start_rails.sh"]
+    command: ["./scripts/wait_for_it.sh", "db:5432", "--", "./scripts/start_rails.sh"]
     volumes:
-      - .:/opt/videoshare:cached
+      - .:/opt/dockerrailsdemo:cached
