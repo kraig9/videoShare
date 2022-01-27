@@ -24,5 +24,4 @@ window.onload = function() {
 
     document.getElementById('joinRoomId')
             .addEventListener('keydown', filterInput);
-
 }
