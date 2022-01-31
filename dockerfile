@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-slim
+FROM ruby:3.0.3-slim
 ARG precompileassets
 
 RUN apt-get update && apt-get install -y wget gnupg curl
@@ -28,7 +28,7 @@ WORKDIR /gems
 COPY Gemfile .
 COPY Gemfile.lock .
 RUN bundle config build.nokogiri --use-system-libraries
-RUN apt-get update && apt-get install -y gcc ruby-dev pkg-config make libxml2-dev libxslt1-dev zlib1g-dev g++ libsqlite3-dev
+RUN apt-get update && apt-get install -y gcc ruby-dev pkg-config make libxml2-dev libxslt1-dev zlib1g-dev g++ libsqlite3-dev inotify-tools
 RUN bundle install
 
 ARG INSTALL_PATH=/opt/videoShare
@@ -37,4 +37,3 @@ WORKDIR $INSTALL_PATH
 COPY scripts/potential_asset_precompile.sh .
 RUN ./potential_asset_precompile.sh $precompileassets
 RUN rm potential_asset_precompile.sh
-RUN apt-get install -y inotify-tools
