@@ -34,6 +34,7 @@ RUN bundle install
 ARG INSTALL_PATH=/opt/videoShare
 ENV INSTALL_PATH $INSTALL_PATH
 WORKDIR $INSTALL_PATH
-COPY . .
-
-RUN scripts/potential_asset_precompile.sh $precompileassets
+COPY scripts/potential_asset_precompile.sh .
+RUN ./potential_asset_precompile.sh $precompileassets
+RUN rm potential_asset_precompile.sh
+RUN apt-get install -y inotify-tools

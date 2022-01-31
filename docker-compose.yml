@@ -11,7 +11,7 @@ services:
     image: ${DOCKER_IMAGE_NAME-videoshare}
     command: ["./scripts/start_webpack_dev.sh"]
     volumes:
-      - .:/opt/videoShare:cached
+      - .:/opt/videoShare
     ports:
       - 3035:3035
 
@@ -26,6 +26,6 @@ services:
       - webpacker
     ports:
       - 3000:3000
-    command: ["./scripts/wait_for_it.sh", "db:5432", "--", "./scripts/start_rails.sh"]
+    command: ["./scripts/wait_for_it.sh", "webpacker:3035", "--", "./scripts/start_rails.sh"]
     volumes:
-      - .:/opt/videoShare:cached
+      - .:/opt/videoShare
