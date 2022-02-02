@@ -6,11 +6,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc
 RUN curl -q https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 RUN apt-get update && \
-      apt-get install -y \
-        build-essential \
-        vim \
-        git-all \
-        ssh \
+      apt-get install \
         postgresql-client-11 libpq5 libpq-dev -y && \
       wget -qO- https://deb.nodesource.com/setup_12.x  | bash - && \
       apt-get install -y nodejs && \
@@ -19,7 +15,6 @@ RUN apt-get update && \
       apt-get update && \
       apt-get install yarn && \
       apt-get clean && \
-      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN gem install bundler -v 2.1.4
 #Install gems
